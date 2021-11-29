@@ -1,7 +1,33 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+const path = require("path");
+import {defineConfig, ConfigEnv } from 'vite'
+import {createVuePlugin as vue} from 'vite-plugin-vue2'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-    plugins: [vue()]
+export default defineConfig((_configEnv: ConfigEnv) => {
+    return{
+        plugins: [vue()],
+        resolve: {
+            extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+            alias: {
+                "@": path.resolve(__dirname, "./src"),
+            },
+        },
+        build: {
+            outDir: "./dist/",
+            sourcemap: true,
+            rollupOptions: {
+                output: {
+                    entryFileNames: `[name].js`,
+                    chunkFileNames: `[name].js`,
+                    assetFileNames: `[name].[ext]`
+                }
+            },
+        },
+        server: {
+            port: 3000,
+            hmr: {
+                port: 9000
+            },
+        }
+    }
 })

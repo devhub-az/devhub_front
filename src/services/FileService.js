@@ -1,7 +1,7 @@
-import * as API from "@/services/API";
+import * as API from '@/services/API'
 
 export default {
-  uploadFile(payload) {
-    return API.apiClient.post(payload.endpoint, payload.file);
-  },
-};
+    uploadFile(payload) {
+        return API.apiClient.post(payload.endpoint, payload.file)
+    },
+}
