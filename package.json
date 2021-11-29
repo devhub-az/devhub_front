@@ -23,7 +23,7 @@
         "@tailwindcss/postcss7-compat": "^2.2.4",
         "@vue/eslint-config-prettier": "^6.0.0",
         "@tailwindcss/typography": "^0.4.0",
-        "autoprefixer": "^9.8.6",
+        "autoprefixer": "^9.8.8",
         "eslint": "^8.1.0",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-vue": "8",
