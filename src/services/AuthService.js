@@ -2,8 +2,9 @@ import axios from 'axios'
 import store from '@/store'
 
 export const authClient = axios.create({
-    baseURL: import.meta.env.VUE_APP_API_URL,
+    baseURL: import.meta.env.VITE_APP_API_URL,
     withCredentials: true, // required to handle the CSRF token
+    timeout: 1000
 })
 
 /*

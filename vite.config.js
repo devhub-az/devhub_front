@@ -1,10 +1,10 @@
 const path = require("path");
-import {defineConfig, ConfigEnv } from 'vite'
+import {defineConfig} from 'vite'
 import {createVuePlugin as vue} from 'vite-plugin-vue2'
 
 // https://vitejs.dev/config/
-export default defineConfig((_configEnv: ConfigEnv) => {
-    return{
+export default defineConfig(() => {
+    return {
         plugins: [vue()],
         resolve: {
             extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
@@ -23,11 +23,5 @@ export default defineConfig((_configEnv: ConfigEnv) => {
                 }
             },
         },
-        server: {
-            port: 3000,
-            hmr: {
-                port: 9000
-            },
-        }
     }
 })

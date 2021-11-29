@@ -1,15 +1,6 @@
 version: "3.9"
 
 services:
-    frontend:
-        container_name: nginx
-        build:
-            context: .docker/development/nginx
-        ports:
-            - "8090:80"
-        networks:
-            - devhub
-
     frontend-node:
         container_name: node
         build:
@@ -17,6 +8,8 @@ services:
         volumes:
             - ./:/app
         tty: true
+        ports:
+            - "3000:3000"
         networks:
             - devhub
 
