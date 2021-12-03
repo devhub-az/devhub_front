@@ -4,7 +4,8 @@ import store from '@/store'
 export const authClient = axios.create({
     baseURL: import.meta.env.VITE_APP_API_URL,
     withCredentials: true, // required to handle the CSRF token
-    timeout: 1000
+    timeout: 1000,
+    headers: {Accept: 'application/json'}
 })
 
 /*
@@ -29,34 +30,34 @@ authClient.interceptors.response.use(
 
 export default {
     async login(payload) {
-        await authClient.get('/sanctum/csrf-cookie')
-        return authClient.post('/login', payload)
+        let data = authClient.post('api/auth/login', payload)
+        localStorage.setItem('token', data.token)
+        return data.user;
     },
     logout() {
-        return authClient.post('/logout')
+        return authClient.post('/api/auth/logout')
     },
     async forgotPassword(payload) {
         await authClient.get('/sanctum/csrf-cookie')
-        return authClient.post('/forgot-password', payload)
+        return authClient.post('/api/auth/forgot-password', payload)
     },
     getAuthUser() {
-        return authClient.get('/api/users/auth')
+        return authClient.get('api/auth/me')
     },
     async resetPassword(payload) {
         await authClient.get('/sanctum/csrf-cookie')
-        return authClient.post('/reset-password', payload)
+        return authClient.post('/api/auth/reset-password', payload)
     },
     updatePassword(payload) {
-        return authClient.put('/user/password', payload)
+        return authClient.put('/api/auth/user/password', payload)
     },
     async registerUser(payload) {
-        await authClient.get('/sanctum/csrf-cookie')
-        return authClient.post('/register', payload)
+        const token = authClient.post('/api/auth/register', payload)
     },
     sendVerification(payload) {
-        return authClient.post('/email/verification-notification', payload)
+        return authClient.post('/api/auth/email/verification-notification', payload)
     },
     updateUser(payload) {
-        return authClient.put('/user/profile-information', payload)
+        return authClient.put('/api/auth/user/profile-information', payload)
     },
 }

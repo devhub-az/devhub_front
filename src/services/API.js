@@ -9,6 +9,7 @@ import store from '@/store'
 export const apiClient = axios.create({
     baseURL: import.meta.env.VITE_APP_API_URL + '/api',
     withCredentials: true, // required to handle the CSRF token
+    headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
 })
 
 /*
