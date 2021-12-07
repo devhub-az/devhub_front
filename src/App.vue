@@ -8,13 +8,17 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
+import Header from './components/Header'
 
 export default {
     name: 'app',
     components: {
         Header,
     },
+    metaInfo: {
+        // all titles will be injected into this template
+        titleTemplate: '%s | DevHub'
+    }
 }
 </script>
 
