@@ -16,6 +16,18 @@ const routes = [
         component: () => import('../views/Home'),
     },
     {
+        path: '/',
+        name: 'articles',
+        meta: {middleware: [guest]},
+        component: () => import('../views/Home'),
+    },
+    {
+        path: '/1',
+        name: 'hubs',
+        meta: {middleware: [guest]},
+        component: () => import('../views/Home'),
+    },
+    {
         path: '/dashboard',
         name: 'dashboard',
         meta: {middleware: [auth]},
