@@ -2323,14 +2323,7 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-rollup@^2.58.0:
-  version "2.60.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.60.1.tgz#4b34cd247f09b421f10a3c9286eda2ecf9972079"
-  integrity sha512-akwfnpjY0rXEDSn1UTVfKXJhPsEBu+imi1gqBA1ZkHGydUnkV/fWCC90P7rDaLEW8KTwBcS1G3N4893Ndz+jwg==
-  optionalDependencies:
-    fsevents "~2.3.2"
-
-rollup@^2.59.0:
+rollup@^2.58.0, rollup@^2.59.0:
   version "2.60.2"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.60.2.tgz#3f45ace36a9b10b4297181831ea0719922513463"
   integrity sha512-1Bgjpq61sPjgoZzuiDSGvbI1tD91giZABgjCQBKM5aYLnzjq52GoDuWVwT/cm/MCxCMPU8gqQvkj8doQ5C8Oqw==
@@ -2565,10 +2558,10 @@ vite-plugin-vue2@^1.9.0:
     source-map "^0.7.3"
     vue-template-es2015-compiler "^1.9.1"
 
-vite@^2.6.4:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.0.tgz#d3d753220d10afb055731cd7feaa8e87b2b779b6"
-  integrity sha512-ZM629j9n6f1Gcr2KsfpLhJ0FRkift4SsTLSvExmNpGJYzyi1JyLOFybz85ShqFP5f4oCfJSblWAma9X8lZg/vA==
+vite@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.1.tgz#be50ad13214290ecbebbe5ad389ed423cb5f137e"
+  integrity sha512-TDXXhcu5lyQ6uosK4ZWaOyB4VzOiizk0biitRzDzaEtgSUi8rVYPc4k1xgOjLSf0OuceDJmojFKXHOX9DB1WuQ==
   dependencies:
     esbuild "^0.13.12"
     postcss "^8.3.11"

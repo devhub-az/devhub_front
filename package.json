@@ -18,7 +18,7 @@
         "axios": "^0.21.2",
         "postcss": "^8.4.4",
         "tailwindcss": "^2.2.19",
-        "vite": "^2.6.4",
+        "vite": "^2.7.1",
         "vite-plugin-html": "^2.1.1",
         "vite-plugin-vue2": "^1.9.0",
         "vue-clickaway": "^2.2.2",
