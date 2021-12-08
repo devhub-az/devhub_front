@@ -1,5 +1,7 @@
+import languages from "./languages"
+import {resolve} from 'path'
+
 export default {
-    // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: 'devhub_front',
         meta: [
@@ -10,61 +12,126 @@ export default {
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-        ]
+        ],
+        script: [
+            { src: 'https://code.iconify.design/2/2.0.3/iconify.min.js', body: true },
+        ],
     },
 
-    // Global CSS: https://go.nuxtjs.dev/config-css
+    server: {
+        host: "0.0.0.0",
+    },
+
+
+    alias: {
+        'components': resolve(__dirname, './components'),
+        'assets': resolve(__dirname, './assets'),
+    },
+
     css: [],
 
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [],
 
-    // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
 
-    // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
-        // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
     ],
 
-    // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
-        // https://go.nuxtjs.dev/axios
-        '@nuxtjs/axios',
-        // https://go.nuxtjs.dev/pwa
-        '@nuxtjs/pwa',
+        "@nuxtjs/axios",
+        "@nuxtjs/toast",
+        "@nuxtjs/i18n",
+        "@nuxtjs/robots",
+        "@nuxtjs/sitemap",
     ],
 
-    // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {},
 
-    // PWA module configuration: https://go.nuxtjs.dev/pwa
     pwa: {
         manifest: {
             lang: 'en'
         }
     },
 
-    // Build Configuration: https://go.nuxtjs.dev/config-build
+    toast: {
+        position: "bottom-center",
+        duration: 3000,
+        keepOnHover: true,
+    },
+
+    i18n: {
+        locales: languages,
+        defaultLocale: "az",
+        vueI18n: {
+            fallbackLocale: "az",
+        },
+        lazy: true,
+        langDir: "locales/",
+        detectBrowserLanguage: {
+            alwaysRedirect: true,
+            fallbackLocale: "az",
+        }
+    },
+
     build: {
-        html: {
-            minify: {
-                collapseBooleanAttributes: true,
-                decodeEntities: true,
-                minifyCSS: false,
-                minifyJS: false,
-                processConditionalComments: true,
-                removeEmptyAttributes: true,
-                removeRedundantAttributes: true,
-                trimCustomFragments: true,
-                useShortDoctype: true
+        extend(config, {isDev, isClient}) {
+            if (isDev) {
+                config.mode = "development"
+            }
+
+            config.node = {
+                fs: "empty",
+            }
+
+            if (isClient) {
+                config.module.rules.unshift({
+                    test: /\.worker\.(c|m)?js$/i,
+                    use: {loader: "worker-loader"},
+                    exclude: /(node_modules)/,
+                })
+
+                config.module.rules.push({
+                    test: /\.md$/i,
+                    use: {loader: "raw-loader"},
+                    exclude: /(node_modules)/,
+                })
+
+                config.module.rules.push({
+                    test: /\.geojson$/i,
+                    use: {loader: "json-loader"},
+                    exclude: /(node_modules)/,
+                })
+
+                config.module.rules.push({
+                    test: /\.mjs$/,
+                    include: /node_modules/,
+                    type: "javascript/auto",
+                })
+
+                config.module.rules.push({
+                    test: /\.js$/,
+                    include: /(node_modules)/,
+                    exclude: /(node_modules)\/(@firebase)/,
+                    loader: "babel-loader",
+                    options: {
+                        plugins: [
+                            "@babel/plugin-proposal-class-properties",
+                            "@babel/plugin-proposal-nullish-coalescing-operator",
+                            "@babel/plugin-proposal-optional-chaining",
+                        ],
+                    },
+                })
             }
         },
-        loaders: {
-            vue: {
-                prettify: false
-            }
+        parallel: true,
+        cache: true,
+        terser: {
+            terserOptions: {
+                compress: {
+                    pure_funcs: ["console.log", "console.debug", "console.warn"],
+                },
+            },
         },
     },
 }

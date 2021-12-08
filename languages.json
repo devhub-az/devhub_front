@@ -1,0 +1,23 @@
+[
+    {
+        "code": "az",
+        "file": "az.json",
+        "iso": "az-AZ",
+        "name": "Azərbaycan",
+        "icon": "twemoji:flag-for-flag-azerbaijan"
+    },
+    {
+        "code": "ru",
+        "file": "ru.json",
+        "iso": "ru-RU",
+        "name": "Русский",
+        "icon": "twemoji:flag-for-flag-russia"
+    },
+    {
+        "code": "en",
+        "file": "en.json",
+        "iso": "en-EN",
+        "name": "English",
+        "icon": "twemoji:flag-for-flag-united-kingdom"
+    }
+]
