@@ -1,15 +1,14 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    purge: [
-        './components/**/*.{vue,js}',
-        './layouts/**/*.vue',
-        './pages/**/*.vue',
-        './plugins/**/*.{js,ts}',
-        './nuxt.config.{js,ts}',
+    content: [
+        "./components/**/*.{js,vue,ts}",
+        "./layouts/**/*.vue",
+        "./pages/**/*.vue",
+        "./plugins/**/*.{js,ts}",
+        "./nuxt.config.{js,ts}",
     ],
-    mode: "jit",
-    darkMode: 'class', // or 'media' or 'class'
+    darkMode: 'class',
     theme: {
         fontFamily: {
             sans: ['inter', 'Roboto', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Helvetica', "Apple Color Emoji", 'Arial, sans-serif', "Segoe UI Emoji", "Segoe UI Symbol"]
@@ -54,7 +53,7 @@ module.exports = {
                 DEFAULT: '#ff49db',
                 dark: '#ff16d1',
             },
-            green: colors.green,
+            green: colors.zinc,
             gray: colors.gray,
             border: {
                 DEFAULT: '#222226',
@@ -87,12 +86,6 @@ module.exports = {
                 'list': '64px auto',
                 'auto-fit': 'repeat(auto-fit, minmax(0, 1fr))',
             }
-        },
-    },
-    variants: {
-        extend: {
-            display: ['dark'],
-            borderWidth: ['hover']
         },
     },
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],

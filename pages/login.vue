@@ -15,7 +15,7 @@
             <input aria-invalid="true" autocomplete="off" id="email" name="email"
                    placeholder="richard.hendricks@piedpiper.com"
                    type="text" inputmode="text"
-                   class="input bg-white dark:bg-dpaper border-gray-200 text-black dark:text-white placeholder-gray-500 caret-white"
+                   class="input bg-white border-gray-200 text-black dark:text-white placeholder-gray-500 caret-white"
                    aria-label="geremy@mailer.io"
                    autocorrect="off" autocapitalize="none"
                    spellcheck="false"
@@ -24,17 +24,17 @@
                 <input aria-invalid="true" autocomplete="current-password" id="password" name="password"
                        placeholder="••••••••"
                        :type="type" inputmode="password"
-                       class="input bg-white dark:bg-dpaper border-gray-200 text-black dark:text-white placeholder-gray-500 caret-white"
+                       class="input bg-white border-gray-200 text-black dark:text-white placeholder-gray-500 caret-white"
                        aria-label="Şifrə"
                        autocapitalize="none"
                        spellcheck="false"
                        v-model="password">
                 <div v-if="type === 'password'" @click="typeChange()">
-                    <span class="iconify absolute translate-y-1/2 text-gray-400 top-0 my-3 mr-4 cursor-pointer right-0"
+                    <span class="iconify absolute text-gray-400 top-4 cursor-pointer right-2"
                           data-icon="mdi:eye-off"></span>
                 </div>
                 <div v-else-if="type !== 'password'" @click="typeChange()" class="z-50">
-                    <span class="iconify absolute translate-y-1/2 text-gray-400 top-0 my-3 mr-4 cursor-pointer right-0"
+                    <span class="iconify absolute text-gray-400 top-4 cursor-pointer right-2"
                           data-icon="mdi:eye"></span>
                 </div>
             </div>
@@ -66,10 +66,10 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
     layout: 'auth',
+    middleware: 'auth',
+    auth: 'guest',
     head(){
         return {
             title: this.$t('auth.title'),
@@ -98,12 +98,17 @@ export default {
         },
         login() {
             this.loading = true
-            this.$auth.loginWith('laravelSanctum', {
+            this.$auth.loginWith('cookie', {
                 data: {
                     email: this.email,
                     password: this.password
-                }
-            })
+                },
+            }).then(() => this.$router.push('/'))
+                .catch(error => {
+                    if (error.response.status !== 422) throw error
+                    this.errors = Object.values(error.response.data.errors).flat();
+                    this.loading = false
+                })
         },
     }
 }

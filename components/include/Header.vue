@@ -23,7 +23,7 @@
                     </div>
                     <ul class="grid relative grid-flow-col font-medium text-sm space-x-3 md:hidden sm:hidden xs:hidden items-center justify-center"
                         id="menu">
-                        <li v-for="(item, index) in items"
+                        <li v-for="(item, index) in menu"
                             :key="index">
                             <NuxtLink :to="localePath(item)"
                                       class="hover:border-b-2 trans-none hover:border-cerulean-100 pb-1 font-semibold dark:text-white text-gray-500 hover:text-black dark:text-gray-300"
@@ -34,24 +34,50 @@
                     </ul>
                 </div>
             </div>
+            <template v-if="$auth.user">
+                <a href="" class="text-gray-700 hover:text-purple-700" @click.prevent="logout">
+                    Log Out
+                </a>
+                <NuxtLink to="/profile" class="text-gray-700 ml-7 border border-gray-300 hover:border-purple-400 hover:text-purple-700 rounded px-4 py-2">
+                    Profile
+                </NuxtLink>
+            </template>
+            <template v-else>
+                <NuxtLink :to="localePath('/login')"
+                   class="lg:hidden xl:hidden md:hidden sm:block xs:block text-2xl text-gray-700 dark:text-gray-100">
+                    <i class="iconify" data-icon="mdi-account-outline"></i>
+                </NuxtLink>
+                <div class="flex items-center space-x-2 xs:hidden sm:hidden">
+                    <NuxtLink :to="localePath('/login')"
+                              class="btn-outline trans-none text-xs px-4 h-7">
+                        {{ $t('devhub.login') }}
+                    </NuxtLink>
+                    <NuxtLink :to="localePath('/register')"
+                              class="btn trans-none text-xs px-4 h-7">
+                        {{ $t('devhub.register') }}
+                    </NuxtLink>
+                </div>
+            </template>
         </div>
     </header>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-
 export default {
     name: 'Header',
     data: () => {
         return {
-            items: ["articles", "hubs", "authors", "about"],
+            menu: ["articles", "hubs", "authors", "about"],
         };
     },
-    created() {
+    mounted() {
         console.log(this.$router)
     },
-    computed: {
+    methods: {
+        logout() {
+            this.$auth.logout();
+        }
     },
+    computed: {},
 }
 </script>
