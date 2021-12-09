@@ -1,4 +1,3 @@
-<script src="../../../../../Downloads/Telegram Desktop/nuxt.config.js"></script>
 <template>
     <header class="bg-white dark:bg-dheader sm:px-4 md:px-4 xs:px-4 trans-none" id="header">
         <div class="flex items-center justify-between h-12 lg:container mx-auto">
@@ -49,6 +48,10 @@ export default {
             items: ["articles", "hubs", "authors", "about"],
         };
     },
-    computed: {},
+    created() {
+        console.log(this.$router)
+    },
+    computed: {
+    },
 }
 </script>
