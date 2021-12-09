@@ -4,7 +4,19 @@
                 @click="show = !show"
                 class="relative w-full bg-white border dark:bg-dpaper dark:border-gray-700 border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-100 transition-colors pl-3 pr-7 h-7 text-left focus:outline-none focus:ring-0 dark:focus:border-gray-700 sm:text-sm">
             <span class="flex items-center">
-                <span class="ml-1 block truncate text-black dark:text-gray-300">
+                <span :class="selected.name === availableLocales[0].name ? '' : 'hidden'">
+                    <span class="iconify transition-none dark:text-gray-300"
+                          :data-icon="availableLocales[0].icon" data-inline="false"></span>
+                </span>
+                <span :class="selected.name === availableLocales[1].name ? '' : 'hidden'">
+                    <span class="iconify transition-none dark:text-gray-300"
+                          :data-icon="availableLocales[1].icon" data-inline="false"></span>
+                </span>
+                <span :class="selected.name === availableLocales[2].name ? '' : 'hidden'">
+                    <span class="iconify transition-none dark:text-gray-300"
+                          :data-icon="availableLocales[2].icon" data-inline="false"></span>
+                </span>
+                <span class="ml-2 block truncate text-black dark:text-gray-300">
                     {{ selected.name }}
                 </span>
             </span>

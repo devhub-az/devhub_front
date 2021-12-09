@@ -4,14 +4,21 @@
                 @click="show = !show"
                 class="relative w-full bg-white border dark:bg-dpaper dark:border-gray-700 border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-100 transition-colors pl-3 pr-7 h-7 text-left focus:outline-none focus:ring-0 dark:focus:border-gray-700 sm:text-sm">
             <span class="flex items-center">
-                <span class="iconify transition-none dark:text-gray-300"
-                      data-icon="selected.icon" data-inline="false"></span>
-                <span class="ml-1 block truncate text-black dark:text-gray-300">
-                    {{ selected.name }}
+                <span :class="selected.name === themes[0].name ? '' : 'hidden'">
+                    <span class="iconify transition-none dark:text-gray-300"
+                          :data-icon="themes[0].icon" data-inline="false"></span>
+                </span>
+                <span :class="selected.name === themes[1].name ? '' : 'hidden'">
+                    <span class="iconify transition-none dark:text-gray-300"
+                          :data-icon="themes[1].icon" data-inline="false"></span>
+                </span>
+                <span class="ml-2 block truncate text-black dark:text-gray-300">
+                    {{ $t('devhub.' + selected.name) }}
                 </span>
             </span>
             <span class="ml-1 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <span class="iconify transition-none dark:text-gray-300" data-icon="heroicons-outline:chevron-down" data-inline="false"></span>
+                <span class="iconify transition-none dark:text-gray-300" data-icon="heroicons-outline:chevron-down"
+                      data-inline="false"></span>
             </span>
         </button>
         <transition name="fade">
@@ -24,9 +31,9 @@
                              @click="changeTheme(theme)"
                              v-for="theme in themes">
                             <span class="iconify transition-none dark:text-gray-300 dark:group-hover:text-black"
-                                  data-icon="theme.icon" data-inline="false"></span>
-                            <span class="ml-1 block truncate dark:text-gray-300 dark:group-hover:text-black">
-                                {{ theme.name }}
+                                  :data-icon="theme.icon" data-inline="false"></span>
+                            <span class="ml-2 block truncate dark:text-gray-300 dark:group-hover:text-black">
+                                {{ $t('devhub.' + theme.name) }}
                             </span>
                         </div>
                     </li>
@@ -38,6 +45,7 @@
 
 <script>
 import {mixin as clickaway} from 'vue-clickaway'
+import {mapState} from 'vuex'
 
 export default {
     mixins: [clickaway],
@@ -48,25 +56,28 @@ export default {
         return {
             selected: {},
             themes: [
-                {'name': 'Dark', 'icon': 'bytesize:moon'},
-                {'name': 'Light', 'icon': 'carbon:sun'},
+                {'name': 'dark', 'icon': 'bytesize:moon'},
+                {'name': 'light', 'icon': 'carbon:sun'},
             ],
             show: false
         }
     },
     created() {
-        this.selected = 'dark' ? {'name': 'Dark', 'icon': 'bytesize:moon'} : {'name': 'Light', 'icon': 'carbon:sun'}
+        this.selected = this.theme === 'dark' ? this.themes[0] : this.themes[1]
+    },
+    computed: {
+        ...mapState('theme', ['theme'])
     },
     methods: {
         changeTheme(theme) {
-            if (theme.icon !== 'bytesize:moon') {
+            if (theme.name !== 'dark') {
+                this.$store.dispatch('theme/changeTheme', '')
                 this.selected = this.themes[1]
-                document.querySelector('html').classList.remove('dark')
-                this.show = false
+                this.hideDropdown()
             } else {
+                this.$store.dispatch('theme/changeTheme', 'dark')
                 this.selected = this.themes[0]
-                document.querySelector('html').classList.add('dark')
-                this.show = false
+                this.hideDropdown()
             }
         },
         hideDropdown() {

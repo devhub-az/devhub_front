@@ -1,6 +1,12 @@
 import languages from "./languages"
 import {resolve} from 'path'
 
+const config = {
+    isDev: true,
+    isProd: false,
+    useBaseUrl: true
+}
+
 export default {
     head: {
         title: 'devhub_front',
@@ -19,7 +25,8 @@ export default {
     },
 
     server: {
-        host: "0.0.0.0",
+        port: 3000,
+        host: '0.0.0.0'
     },
 
 
@@ -44,13 +51,45 @@ export default {
         "@nuxtjs/i18n",
         "@nuxtjs/robots",
         "@nuxtjs/sitemap",
+        'cookie-universal-nuxt',
     ],
 
-    axios: {},
+    auth: {
+        redirect: false,
+        localStorage: false,
+        strategies: {
+            local: {
+                url: '/',
+                endpoints: {
+                    login: {
+                        url: '/login'
+                    },
+                    logout: {
+                        url: '/logout'
+                    },
+                    user: {
+                        url: '/user'
+                    }
+                },
+                user: {
+                    property: 'user',
+                    // autoFetch: true
+                },
+                token: {
+                    property: 'meta.token',
+                    maxAge: 15768000
+                }
+            },
+        }
+    },
+
+    axios: {
+        baseURL: config.isProd ? 'https://mashin.al/api' : 'https://dev.mashin.al/api'
+    },
 
     pwa: {
         manifest: {
-            lang: 'en'
+            lang: 'az'
         }
     },
 
