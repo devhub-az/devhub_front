@@ -32,53 +32,11 @@ yarn-install:
 yarn-upgrade:
 	docker-compose run --rm node yarn upgrade
 
-try-build:
-	REGISTRY=hose1021 IMAGE_TAG=0 make build
-
-push-build-latest: push-build-latest-develop
-
-push-build-latest-develop:
-	docker push ${REGISTRY}/devhub:latest
-
 docker-down-clear:
  	COMPOSE_PROJECT_NAME=devhub docker-compose -f docker-compose.yml down -v --remove-orphans
 
-build: build-devhub build-devhub_mysql build-devhub_nginx
-
-build-devhub:
-	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --cache-from ${REGISTRY}/devhub:latest \
-            --tag ${REGISTRY}/devhub:latest \
-            --tag ${REGISTRY}/devhub:${IMAGE_TAG} \
-            --file .docker/production/php/Dockerfile .
-build-devhub_mysql:
-	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --cache-from ${REGISTRY}/devhub_mysql:latest \
-            --tag ${REGISTRY}/devhub_mysql:latest \
-            --tag ${REGISTRY}/devhub_mysql:${IMAGE_TAG} \
-            --file .docker/production/mysql/Dockerfile .
-
-build-devhub_nginx:
-	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --cache-from ${REGISTRY}/devhub_nginx:latest \
-            --tag ${REGISTRY}/devhub_nginx:latest \
-            --tag ${REGISTRY}/devhub_nginx:${IMAGE_TAG} \
-            --file .docker/production/nginx/Dockerfile .
-
 push:
 	docker-compose push
-
-deploy:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'rm -rf devhub'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'mkdir devhub'
-	scp -o StrictHostKeyChecking=no docker-compose-production.yml deploy@${HOST}:devhub/docker-compose.yml
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && echo "COMPOSE_PROJECT_NAME=devhub" >> .env'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && echo "REGISTRY=${REGISTRY}" >> .env'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && echo "IMAGE_TAG=${IMAGE_TAG}" >> .env'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && docker-compose pull'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && docker-compose down'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && docker volume rm devhub_public'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} 'cd devhub && docker-compose up --build --remove-orphans -d'
 
 banner:
 	@echo "oooooooooo.                        ooooo   ooooo              .o8      "
