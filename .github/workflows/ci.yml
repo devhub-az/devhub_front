@@ -26,4 +26,4 @@ jobs:
                 run: make yarn-install
 
             -   name: Yarn start dev
-                run: docker-compose run --rm node yarn dev
+                run: docker-compose run --rm node yarn dev & npx wait-on http://localhost:3000
