@@ -23,7 +23,7 @@
         "@tailwindcss/typography": "^0.5.0",
         "cookie-universal-nuxt": "^2.1.5",
         "core-js": "^3.15.1",
-        "nuxt": "^2.15.7",
+        "nuxt": "^2.15.8",
         "vue-clickaway": "^2.2.2"
     },
     "devDependencies": {
@@ -35,5 +35,5 @@
         "postcss": "^8.4.4",
         "tailwindcss": "^3.0.0"
     },
-    "postcss": {}
+    "packageManager": "yarn@3.1.1"
 }
