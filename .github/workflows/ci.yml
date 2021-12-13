@@ -1,50 +1,30 @@
-name: ci
-
-on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+name: Develop docker test
+on: [ push, pull_request ]
 
 jobs:
-  ci:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [14]
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@master
-
-      - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
+      - uses: actions/checkout@v2
+      - uses: symfonycorp/security-checker-action@v2
+      
+      - name: Cache frontend yarn
+        uses: actions/cache@v2
         with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
-
-      - name: Get yarn cache directory path 🛠
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install dependencies 👨🏻‍💻
-        run: yarn
-
-      - name: Run linter 👀
-        run: yarn lint
-
+          path: node_modules
+          key: yarn-${{ hashFiles('yarn.lock') }}
+      
+      - name: Docker pull
+        run: make docker-pull
+        
+      - name: Docker build
+        run: make docker-build
+        
+      - name: Yarn install
+        run: make yarn-install
+        
+      - name: Docker up
+        run: make docker-up
+        
+      - name: Yarn start dev
+        run: docker-compose run --rm node yarn dev
