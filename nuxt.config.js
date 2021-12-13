@@ -20,7 +20,7 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ],
         script: [
-            {src: 'https://code.iconify.design/2/2.0.3/iconify.min.js', body: true},
+            {src: 'https://code.iconify.design/2/2.1.0/iconify.min.js', body: true},
         ],
     },
 
@@ -40,7 +40,7 @@ export default {
         '@/assets/css/tailwind.css',
     ],
 
-    plugins: [],
+    plugins: ['~/plugins/axios'],
 
     components: true,
 
@@ -59,14 +59,11 @@ export default {
     ],
 
     auth: {
-        redirect: {
-            login: '/login',
-            logout: '/login',
-            home: '/'
-        },
-        plugins: ['~/plugins/axios'],
+        redirect: false,
+        localStorage: false,
         strategies: {
-            cookie: {
+            local: {
+                url:'/',
                 endpoints: {
                     csrf:{
                         url: 'http://127.0.0.1:8090/sanctum/csrf-cookie'
@@ -86,7 +83,7 @@ export default {
                     // autoFetch: true
                 },
                 token: {
-                    property: 'meta.token',
+                    property: 'token',
                     maxAge: 15768000
                 }
             },
@@ -94,9 +91,11 @@ export default {
     },
 
     axios: {
-        baseURL: config.isProd ? 'https://mashin.al/api' : 'http://127.0.0.1:8090/api',
+        baseURL: config.isProd ? 'https://mashin.al/api' : 'http://api/api',
+        browserBaseURL: 'http://127.0.0.1:8090/api',
         credentials: true,
     },
+
 
     pwa: {
         manifest: {

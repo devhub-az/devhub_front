@@ -3,7 +3,8 @@
         <a href="/login/github"
            class="btn-outline trans-none border-gray-300 dark:border-gray-300 w-full items-center dark:text-black">
             <div class="mx-auto flex space-x-1">
-                <span class="iconify text-base text-gray-700 dark:text-gray-300" data-icon="simple-icons:github" data-inline="true"></span>
+                <span class="iconify text-base text-gray-700 dark:text-gray-300" data-icon="simple-icons:github"
+                      data-inline="true"></span>
             </div>
         </a>
         <div class="my-4 items-center flex">
@@ -54,7 +55,8 @@
                href="/forgot-password">
                 {{ $t('devhub.forgotPassword') }}
             </a>
-            <div class="mt-2 bg-white dark:bg-dpaper dark:text-gray-300 dark:border-gray-700 rounded py-4 text-sm border">
+            <div
+                class="mt-2 bg-white dark:bg-dpaper dark:text-gray-300 dark:border-gray-700 rounded py-4 text-sm border">
                 {{ $t('devhub.notRegistered') }}
                 <a href="/register"
                    class="text-cerulean-500">
@@ -70,7 +72,7 @@ export default {
     layout: 'auth',
     middleware: 'auth',
     auth: 'guest',
-    head(){
+    head() {
         return {
             title: this.$t('auth.title'),
         }
@@ -98,16 +100,20 @@ export default {
         },
         login() {
             this.loading = true
-            this.$auth.loginWith('cookie', {
+            this.$auth.loginWith('local', {
                 data: {
                     email: this.email,
                     password: this.password
                 },
-            }).then(() => this.$router.push('/'))
+            }).then(() => {
+                this.loading = false
+                this.$router.push('/')
+            })
                 .catch(error => {
-                    if (error.response.status !== 422) throw error
-                    this.errors = Object.values(error.response.data.errors).flat();
-                    this.loading = false
+                    console.log(error);
+                    // if (error.response.status !== 422) throw error
+                    // this.errors = Object.values(error.response.data.errors).flat();
+                    // this.loading = false
                 })
         },
     }
