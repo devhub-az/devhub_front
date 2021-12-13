@@ -56,7 +56,7 @@ export default {
     },
     data: () => {
         return {
-            menu: ["articles", "hubs", "authors", "about"],
+            menu: ["index", "hubs", "authors", "about"],
         };
     },
     methods: {
