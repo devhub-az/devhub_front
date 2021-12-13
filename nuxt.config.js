@@ -9,7 +9,7 @@ const config = {
 
 export default {
     head: {
-        title: 'devhub_front',
+        title: 'DevHub',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -20,7 +20,7 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ],
         script: [
-            { src: 'https://code.iconify.design/2/2.0.3/iconify.min.js', body: true },
+            {src: 'https://code.iconify.design/2/2.1.0/iconify.min.js', body: true},
         ],
     },
 
@@ -29,20 +29,23 @@ export default {
         host: '0.0.0.0'
     },
 
+    loading: false,
 
     alias: {
         'components': resolve(__dirname, './components'),
         'assets': resolve(__dirname, './assets'),
     },
 
-    css: [],
+    css: [
+        '@/assets/css/tailwind.css',
+    ],
 
-    plugins: [],
+    plugins: ['~/plugins/axios'],
 
     components: true,
 
     buildModules: [
-        '@nuxtjs/tailwindcss',
+        '@nuxt/postcss8',
     ],
 
     modules: [
@@ -51,6 +54,7 @@ export default {
         "@nuxtjs/i18n",
         "@nuxtjs/robots",
         "@nuxtjs/sitemap",
+        '@nuxtjs/auth-next',
         'cookie-universal-nuxt',
     ],
 
@@ -59,24 +63,27 @@ export default {
         localStorage: false,
         strategies: {
             local: {
-                url: '/',
+                url:'/',
                 endpoints: {
+                    csrf:{
+                        url: 'http://127.0.0.1:8090/sanctum/csrf-cookie'
+                    },
                     login: {
-                        url: '/login'
+                        url: '/auth/login'
                     },
                     logout: {
-                        url: '/logout'
+                        url: '/auth/logout'
                     },
                     user: {
-                        url: '/user'
+                        url: '/auth/user'
                     }
                 },
                 user: {
-                    property: 'user',
+                    property: 'data',
                     // autoFetch: true
                 },
                 token: {
-                    property: 'meta.token',
+                    property: 'token',
                     maxAge: 15768000
                 }
             },
@@ -84,8 +91,11 @@ export default {
     },
 
     axios: {
-        baseURL: config.isProd ? 'https://mashin.al/api' : 'https://dev.mashin.al/api'
+        baseURL: config.isProd ? 'https://mashin.al/api' : 'http://api/api',
+        browserBaseURL: 'http://127.0.0.1:8090/api',
+        credentials: true,
     },
+
 
     pwa: {
         manifest: {
@@ -170,6 +180,12 @@ export default {
                 compress: {
                     pure_funcs: ["console.log", "console.debug", "console.warn"],
                 },
+            },
+        },
+        postcss: {
+            plugins: {
+                tailwindcss: {},
+                autoprefixer: {},
             },
         },
     },

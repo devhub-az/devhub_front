@@ -31,7 +31,7 @@
                 <ul class="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <li id="listbox-item-0" role="option"
                         class="text-gray-900 cursor-default select-none relative">
-                        <nuxt-link :key="locale.code" :to="switchLocalePath(locale.code)"
+                        <NuxtLink :key="locale.code" :to="switchLocalePath(locale.code)"
                                    v-for="locale in availableLocales">
                             <div @click="hide(locale)"
                                  class="flex flex items-center cursor-pointer px-3 hover:bg-gray-300 group">
@@ -42,7 +42,7 @@
                                     {{ locale.name }}
                                 </span>
                             </div>
-                        </nuxt-link>
+                        </NuxtLink>
                     </li>
                 </ul>
             </div>

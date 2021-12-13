@@ -27,13 +27,10 @@ docker-build:
 	DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1 --pull
 
 yarn-install:
-	docker-compose run --rm php yarn install
+	docker-compose run --rm node yarn install
 
 yarn-upgrade:
-	docker-compose run --rm php yarn upgrade
-
-yarn-prod:
-	docker-compose run --rm php yarn prod
+	docker-compose run --rm node yarn upgrade
 
 try-build:
 	REGISTRY=hose1021 IMAGE_TAG=0 make build

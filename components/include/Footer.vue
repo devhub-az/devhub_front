@@ -4,9 +4,9 @@
             <div class="mb-8 w-32 xs:mx-auto">
                 <NuxtLink :to="localePath('/')"
                           class="font-medium text-gray-100 xs:pb-4 w-32">
-                    <img src="~/assets/images/DevHub_Chrome_Full_Logo.svg" alt="DevHub Logo"
+                    <img src="/images/DevHub_Chrome_Full_Logo.svg" alt="DevHub Logo"
                          class="h-8 xs:h-9 mb-4 hidden dark:block">
-                    <img src="~/assets/images/DevHub_Monochrome_Full_Logo.svg" alt="DevHub Logo"
+                    <img src="/images/DevHub_Monochrome_Full_Logo.svg" alt="DevHub Logo"
                          class="h-8 xs:h-9 mb-4 dark:hidden">
                 </NuxtLink>
             </div>
