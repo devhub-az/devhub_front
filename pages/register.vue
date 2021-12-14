@@ -160,19 +160,6 @@ export default {
             } catch (e) {
                 this.error = e.response.data.message
             }
-
-            // this.$auth.loginWith('cookie', {
-            //     data: {
-            //         email: this.email,
-            //         password: this.password
-            //     },
-            // }).then(response => {
-            //     this.loading = false
-            //     window.location = '/';
-            // }).catch(error => {
-            //     this.loading = false
-            //     this.errors = error.response.data.errors
-            // })
         },
     }
 }

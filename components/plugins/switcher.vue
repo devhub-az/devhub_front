@@ -49,12 +49,9 @@ import {mapState} from 'vuex'
 
 export default {
     mixins: [clickaway],
-    props: {
-        side: {type: String, required: false},
-    },
-    data: function () {
+    data () {
         return {
-            selected: {},
+            selected: false,
             themes: [
                 {'name': 'dark', 'icon': 'bytesize:moon'},
                 {'name': 'light', 'icon': 'carbon:sun'},

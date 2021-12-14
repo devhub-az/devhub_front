@@ -63,11 +63,9 @@
                     </div>
                 </div>
                 <div id="footer" class="w-1/5 ml-auto xs:ml-0 xs:w-full xs:px-4 xs:pt-4">
-                    <h3 class="dark:text-gray-400 font-medium mb-4">Язык & Тема</h3>
+                    <h3 class="dark:text-gray-400 font-medium mb-4">{{ $t('devhub.land_and_theme') }}</h3>
                     <div class="space-y-4">
-                        <select_menu class="xs:w-full"
-                                     :selected="selected"
-                        ></select_menu>
+                        <select_menu class="xs:w-full"></select_menu>
                         <switcher class="xs:w-full"
                                   :menu="switcher"
                         ></switcher>
@@ -106,8 +104,7 @@ export default {
             switcher: [
                 {'name': 'Dark', 'icon': 'bytesize:moon'},
                 {'name': 'Light', 'icon': 'carbon:sun'},
-            ],
-            selected: {'name': 'Русский', 'icon': 'twemoji:flag-for-flag-russia', 'url': '/lang/ru'}
+            ]
         }
     },
     components: {

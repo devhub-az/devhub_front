@@ -7,8 +7,11 @@ export const state = () => ({
 
 
 export const getters = {
-    data(state) {
-        return state.data
+    articles: (state) => {
+        return state.articles
+    },
+    pagination: (state) => {
+        return state.pagination
     }
 }
 

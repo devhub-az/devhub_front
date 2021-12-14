@@ -54,10 +54,12 @@
                                 </p>
                             </a>
                         </div>
-                        <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:device-floppy" data-inline="false"></span>
+                        <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:device-floppy"
+                              data-inline="false"></span>
                         <!--                        <favorite :article="article" :auth_check="auth_check"/>-->
                         <div class=" flex items-center cursor-pointer" @click="copy(article.id)">
-                            <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:share" data-inline="false"></span>
+                            <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:share"
+                                  data-inline="false"></span>
                         </div>
                     </div>
                     <div class="progress my-auto h-1 balloon xs:hidden md:hidden sm:hidden"
@@ -85,7 +87,7 @@
                 style="border-right: 2px solid; padding: 0 15px 0 15px;">500</span> Server error</h1>
         </div>
         <div v-else-if="articles.length === 0"
-             class="bg-white dark:bg-dpaper dark:border-gray-700 rounded border py-10">
+             class="bg-white dark:bg-[#1f1f1f] dark:border-gray-800 rounded border py-10">
             <div class="w-2/3 mx-auto space-y-4 xs:w-full xs:px-4">
                 <div class="font-bold space-x-1 flex justify-center items-center text-center text-2xl pb-2">
                     <span class="iconify dark:text-gray-300" data-icon="tabler:square-x"
@@ -106,7 +108,7 @@
 
 <script>
 import pagination from "../plugins/pagination";
-import {mapState, mapActions} from "vuex";
+import {mapState, mapActions, mapGetters} from "vuex";
 // const edjsHTML = require('editorjs-html');
 // const edjsParser = edjsHTML({code: codeParser, image: imageParser, embed: emdebParser});
 //
@@ -142,10 +144,7 @@ export default {
         }
     },
     computed: {
-        ...mapState('articles', ['articles', 'pagination']),
-    },
-    methods: {
-        ...mapActions(["articles/getArticles"]),
+        ...mapGetters('articles', ['articles', 'pagination']),
     },
 }
 </script>

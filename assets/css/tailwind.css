@@ -30,20 +30,20 @@
         py-1
         rounded
         text-base
-        hover:border-cerulean-100
+        hover:border-sky-100
         border
         dark:border-gray-700
-        dark:focus:border-cerulean-500
+        dark:focus:border-sky-500
         dark:text-gray-300
-        dark:hover:border-cerulean-500
+        dark:hover:border-sky-500
         dark:bg-transparent
         focus:outline-none
-        focus:border-cerulean-100
+        focus:border-sky-100
         focus:ring-0
     }
 
     .textarea {
-        @apply border bg-white focus:ring-0 hover:border-cerulean-100 dark:hover:border-cerulean-500 focus:border-cerulean-500 mt-2 block w-full sm:text-sm rounded dark:border-gray-700 dark:text-gray-300 dark:bg-dpaper
+        @apply border bg-white focus:ring-0 hover:border-sky-100 dark:hover:border-sky-500 focus:border-sky-500 mt-2 block w-full sm:text-sm rounded dark:border-gray-700 dark:text-gray-300 dark:bg-dpaper
     }
 
     .multiselect__tags, .multiselect__input, .multiselect__single, .multiselect__content-wrapper {
@@ -55,11 +55,11 @@
     }
 
     .btn {
-        @apply cursor-pointer border xs:w-full focus:outline-none border-cerulean-100 text-sm rounded h-9 items-center inline-flex px-3 text-white bg-cerulean-100 dark:text-gray-200 hover:bg-cerulean-300 dark:hover:bg-cerulean-300
+        @apply cursor-pointer border xs:w-full focus:outline-none dark:border-sky-800 border-sky-100 text-sm rounded h-9 dark:bg-sky-700 items-center inline-flex px-3 text-white bg-sky-100 dark:text-gray-200 hover:bg-sky-300 dark:hover:bg-sky-800
     }
 
     .btn-outline {
-        @apply cursor-pointer border xs:w-full text-sm rounded h-9 items-center inline-flex px-3 border-gray-300 dark:border-gray-600 dark:text-gray-300 focus:outline-none hover:border-cerulean-500 dark:hover:border-cerulean-300
+        @apply cursor-pointer border xs:w-full text-sm rounded h-9 items-center inline-flex px-3 border-gray-300 dark:border-gray-600 dark:text-gray-300 focus:outline-none hover:border-sky-500 dark:hover:border-sky-300
     }
 
     .ce-block__content {
@@ -71,7 +71,7 @@
     }
 
     .button {
-        @apply border border-cerulean-700 font-normal uppercase text-sm rounded px-3 py-2 text-white bg-cerulean-700 hover:bg-cerulean-800 hover:border-cerulean-800
+        @apply border border-sky-700 font-normal uppercase text-sm rounded px-3 py-2 text-white bg-sky-700 hover:bg-sky-800 hover:border-sky-800
     }
 
     .py-05 {
@@ -93,7 +93,7 @@
     }
 
     .prose a {
-        @apply text-cerulean-100
+        @apply text-sky-100
     }
 
     [type='text'],
