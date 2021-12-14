@@ -28,16 +28,16 @@
                 <dropdown></dropdown>
             </template>
             <template v-else>
-                <NuxtLink :to="localePath('/login')"
+                <NuxtLink exact no-prefetch :to="localePath('/login')"
                    class="lg:hidden xl:hidden md:hidden sm:block xs:block text-2xl text-gray-700 dark:text-gray-100">
                     <i class="iconify" data-icon="mdi-account-outline"></i>
                 </NuxtLink>
                 <div class="flex items-center space-x-2 xs:hidden sm:hidden">
-                    <NuxtLink :to="localePath('/login')"
+                    <NuxtLink exact no-prefetch :to="localePath('/login')"
                               class="btn-outline trans-none text-xs px-4 h-7">
                         {{ $t('devhub.login') }}
                     </NuxtLink>
-                    <NuxtLink :to="localePath('/register')"
+                    <NuxtLink exact no-prefetch :to="localePath('/register')"
                               class="btn trans-none text-xs px-4 h-7">
                         {{ $t('devhub.register') }}
                     </NuxtLink>

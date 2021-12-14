@@ -5,9 +5,6 @@
             <img :src="user.attributes.avatar || '/images/avatars/default.png'"
                  class="w-8 h-8 flex-none image-fit rounded object-cover"
                  alt="Profile image">
-            <!--            <img v-else src="/images/avatars/default.png"-->
-            <!--                 class="w-8 h-8 flex-none image-fit rounded object-cover lazyload"-->
-            <!--                 alt="Profile image">-->
         </button>
         <transition name="fade">
             <div v-on-clickaway="hideDropdown" v-if="show" class="mt-2 absolute right-0 origin-top-right z-50">
@@ -62,7 +59,6 @@
 
 <script>
 import {mixin as clickaway} from 'vue-clickaway'
-import axios from "axios"
 
 export default {
     mixins: [clickaway],
@@ -76,10 +72,10 @@ export default {
         hideDropdown() {
             this.show = false
         },
-        logout(evt) {
-            axios.post('/logout')
+        async logout() {
+            await this.$axios.$post('/auth/logout')
                 .then(() => {
-                    window.location.reload();
+                    this.$auth.logout();
                 });
         }
     }
