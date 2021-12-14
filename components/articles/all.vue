@@ -1,7 +1,6 @@
 <template>
     <div>
-        <!--        <articles-loading v-if="loading"/>-->
-        <div class="space-y-3" v-if="!loading && !articlesEmpty">
+        <div class="space-y-3" v-if="articles.length > 0">
             <div class="w-full rounded border bg-white dark:bg-dpaper dark:border-gray-700"
                  v-for="article in articles">
                 <div class="px-3.5">
@@ -17,14 +16,14 @@
                                 {{ '@' + article.relationships.author.data.attributes.username }}</p>
                         </a>
                         <p class="text-xs my-auto mr-auto pl-2 dark:text-gray-300">
-                            {{ article.attributes.created_at }}
+                            {{ article.attributes.created_at | moment('DD MMMM, H:mm') }}
                         </p>
                         <!--                        <div class="flex items-center text-sm my-auto xs:hidden md:hidden sm:hidden read-time"-->
                         <!--                             aria-label="Oxumaq vaxtı" data-balloon-pos="left">-->
                         <!--                            <span class="iconify dark:text-gray-300" data-icon="tabler:clock"></span>-->
                         <!--                            <p class="ml-1 dark:text-gray-300">{{ article.attributes.read_time }}</p>-->
                         <!--                        </div>-->
-                        <!--                        <vote :item="article" class="vote" aria-label="Oxumaq vaxtı" data-balloon-pos="left"/>-->
+                        <vote :item="article" class="vote" aria-label="Oxumaq vaxtı" data-balloon-pos="left"/>
                     </div>
                     <div class="grid grid-flow-col py-2">
                         <a :href="'/article/' + article.attributes.slug"
@@ -32,8 +31,8 @@
                             {{ article.attributes.title }}
                         </a>
                     </div>
-                    <!--                    <hubs-tags v-if="article.relationships.hubs.data.length" :data="article.relationships.hubs.data"-->
-                    <!--                               :auth_check="auth_check"/>-->
+                    <hubs-tags v-if="article.relationships.hubs.data.length" :data="article.relationships.hubs.data"
+                               :auth_check="auth_check"/>
                     <div class="prose my-2 xs:hidden md:hidden sm:hidden">
                         <div
                             v-for="block in edjsParser.parse(JSON.parse(article.attributes.body)).slice(0,2)"
@@ -55,12 +54,10 @@
                                 </p>
                             </a>
                         </div>
-                        <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:device-floppy"
-                              data-inline="false"></span>
+                        <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:device-floppy" data-inline="false"></span>
                         <!--                        <favorite :article="article" :auth_check="auth_check"/>-->
                         <div class=" flex items-center cursor-pointer" @click="copy(article.id)">
-                            <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:share"
-                                  data-inline="false"></span>
+                            <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:share" data-inline="false"></span>
                         </div>
                     </div>
                     <div class="progress my-auto h-1 balloon xs:hidden md:hidden sm:hidden"
@@ -87,7 +84,7 @@
             <h1 style="font-family: 'Nunito', sans-serif;"><span
                 style="border-right: 2px solid; padding: 0 15px 0 15px;">500</span> Server error</h1>
         </div>
-        <div v-else-if="articlesEmpty"
+        <div v-else-if="articles.length === 0"
              class="bg-white dark:bg-dpaper dark:border-gray-700 rounded border py-10">
             <div class="w-2/3 mx-auto space-y-4 xs:w-full xs:px-4">
                 <div class="font-bold space-x-1 flex justify-center items-center text-center text-2xl pb-2">
@@ -108,8 +105,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import pagination from "../plugins/pagination";
+import {mapState, mapActions} from "vuex";
 // const edjsHTML = require('editorjs-html');
 // const edjsParser = edjsHTML({code: codeParser, image: imageParser, embed: emdebParser});
 //
@@ -129,9 +126,8 @@ export default {
     components: {
         pagination,
     },
-    data: function () {
+    data() {
         return {
-            articles: [],
             notification: {
                 message: '',
                 type: '',
@@ -143,38 +139,13 @@ export default {
             loading: false,
             hovered: false,
             articlesEmpty: false,
-            pagination: {
-                'current_page': 1
-            },
         }
     },
-    async asyncData({ store, route }) {
-        await this.getPosts()
+    computed: {
+        ...mapState('articles', ['articles', 'pagination']),
     },
     methods: {
-        async getPosts() {
-            this.loading = true;
-            await axios.get(this.$axios.defaults.baseURL + '/articles/?page=' + this.pagination.current_page).then(({data}) => {
-                this.loading = false;
-                if (data.data.length !== 0) {
-                    this.articles = data.data;
-                    this.pagination = data.meta;
-                    if (this.pagination.last_page > 50) {
-                        this.pagination.last_page = 50;
-                    }
-                    for (let i = 0; i < this.articles.length; i++) {
-                        this.id[i] = this.articles[i].id;
-                    }
-                } else this.articlesEmpty = true;
-            })
-                .catch(error => {
-                    this.loading = false
-                    this.error = true
-                });
-        },
-        async copy(id) {
-            const link = window.location.origin + '/article/' + id;
-        }
+        ...mapActions(["articles/getArticles"]),
     },
 }
 </script>

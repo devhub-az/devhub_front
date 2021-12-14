@@ -1,24 +1,27 @@
 <template class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
-    <div class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4" id="app">
+    <div class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
         <div class="flex space-x-3 xs:space-x-0 xs:block">
-            <ul v-for="user in users" :key="user.id">
-                <li>{{ user }}</li>
-            </ul>
+            <div class="w-left xs:w-full">
+                <articles></articles>
+            </div>
+
+            <div class="w-right xs:w-full">
+
+            </div>
+
         </div>
     </div>
 </template>
 
 <script>
-import {mapState, mapMutations, mapActions, mapGetters} from "vuex";
+import articles from "components/articles/all"
 
 export default {
-    computed: mapState(['users']),
-    async fetch({store}) {
-        if (store.state.users.length === 0)
-            await store.dispatch('getUsers')
+    components: {
+        articles
     },
-    methods: {
-        ...mapActions(["getUsers"])
+    async asyncData({store}) {
+        await store.dispatch('articles/getArticles')
     }
 }
 </script>
