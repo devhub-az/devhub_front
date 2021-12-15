@@ -1,3 +1,3 @@
 export default function ({$auth, redirect}) {
-        return redirect('/login')
+    return redirect('/login')
 }

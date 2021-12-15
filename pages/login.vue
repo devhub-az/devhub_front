@@ -70,8 +70,7 @@
 <script>
 export default {
     layout: 'auth',
-    middleware: 'auth',
-    auth: 'guest',
+    middleware: 'guest',
     head() {
         return {
             title: this.$t('auth.title'),
