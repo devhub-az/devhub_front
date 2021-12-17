@@ -6,7 +6,7 @@
             </div>
 
             <div class="w-right xs:w-full">
-                <hubs-hub-top></hubs-hub-top>
+                <hubs-top-rated></hubs-top-rated>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
 export default {
     async fetch({store}) {
         await store.dispatch('articles/getArticles')
-        await store.dispatch('hubs/getTopHubs')
+        await store.dispatch('hubs/topRated')
     }
 }
 </script>

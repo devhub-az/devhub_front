@@ -56,6 +56,7 @@ export default {
         "@nuxtjs/sitemap",
         '@nuxtjs/auth-next',
         'cookie-universal-nuxt',
+        '@nuxtjs/toast',
     ],
 
     auth: {
@@ -104,9 +105,10 @@ export default {
     },
 
     toast: {
-        position: "bottom-center",
+        position: 'bottom-center',
+        fullWidth: false,
         duration: 3000,
-        keepOnHover: true,
+        singleton: false
     },
 
     i18n: {

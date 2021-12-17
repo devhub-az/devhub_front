@@ -1,6 +1,7 @@
 export const state = () => ({
     hubs: [],
-    top_hubs: [],
+    top_rated: [],
+    top_followed: [],
     pagination: {
         'current_page': 1,
     },
@@ -11,8 +12,11 @@ export const state = () => ({
 
 
 export const getters = {
-    top_hubs(state) {
-        return state.top_hubs
+    top_rated(state) {
+        return state.top_rated
+    },
+    top_followed(state) {
+        return state.top_followed
     },
     hubs(state) {
         return state.hubs
@@ -23,27 +27,50 @@ export const getters = {
 }
 
 export const actions = {
-    async getTopHubs({state, commit}) {
-        if (state.hubs.length === 0) {
-            const data = await this.$axios.$get('/hubs/top')
-            commit('ADD_TOP_HUBS', data.data)
-        }
+    async topRated({commit}) {
+        const data = await this.$axios.$get('/hubs/top_rated')
+        commit('ADD_TOP_RATED', data.data)
     },
-    async getHubs({state, commit}){
+    async topFollowed({commit}) {
+        const data = await this.$axios.$get('/hubs/top_followed')
+        commit('ADD_TOP_FOLLOWED', data.data)
+    },
+    async getHubs({state, commit}) {
         const {data} = await this.$axios.get(`/hubs?page=${state.pagination.current_page}&column=${state.column}&order=${state.order}&perPage=${state.perPage}`)
         commit('ADD_HUBS', data.data)
         commit('ADD_PAGINATION', data.meta)
+    },
+    async follow({store, commit, dispatch}, id) {
+        if (this.$auth.user) {
+            await this.$axios.$post('/hubs/follow/' + id)
+                .then(() => {
+                    commit('follow', id)
+                    dispatch('topFollowed');
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } else {
+            this.$toast.error(this.$t('error.not_registered'))
+        }
     }
 }
 
 export const mutations = {
-    ADD_TOP_HUBS(state, top_hubs) {
-        state.top_hubs = top_hubs;
+    ADD_TOP_RATED(state, top_rated) {
+        state.top_rated = top_rated;
     },
-    ADD_HUBS(state, hubs){
+    ADD_TOP_FOLLOWED(state, top_followed) {
+        state.top_followed = top_followed;
+    },
+    ADD_HUBS(state, hubs) {
         state.hubs = hubs
     },
     ADD_PAGINATION(state, meta) {
         state.pagination = meta;
+    },
+    follow(state, id) {
+        let index = state.hubs.findIndex(x => x.id === id)
+        this._vm.$set(state.hubs[index].attributes, 'follower_check', !state.hubs[index].attributes.follower_check)
     }
 }

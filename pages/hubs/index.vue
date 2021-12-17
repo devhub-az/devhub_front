@@ -5,8 +5,9 @@
                 <lazy-hubs-main></lazy-hubs-main>
             </div>
 
-            <div class="w-right xs:w-full">
-                <hubs-hub-top></hubs-hub-top>
+            <div class="w-right sticky top-2 xs:w-full">
+                <hubs-top-rated></hubs-top-rated>
+                <hubs-top-followed></hubs-top-followed>
             </div>
         </div>
     </div>
@@ -15,8 +16,11 @@
 <script>
 export default {
     async fetch({store}) {
-        await store.dispatch('hubs/getTopHubs')
         await store.dispatch('hubs/getHubs')
+    },
+    async mounted() {
+        await this.$store.dispatch('hubs/topRated')
+        await this.$store.dispatch('hubs/topFollowed')
     }
 }
 </script>

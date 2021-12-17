@@ -52,7 +52,8 @@
     "error": {
         "server_error": "Sistem çöküb",
         "page_not_found": "Страница не найдена",
-        "dev_will_solve": "Mühəndislərimiz problemi ən qısa zamanda aradan qaldıracaq"
+        "dev_will_solve": "Mühəndislərimiz problemi ən qısa zamanda aradan qaldıracaq",
+        "not_registered": "Bu funksiyanı istifadə etmək üçün, qeydiyyatdan keçin"
     },
     "meta": {
         "meta-descr_announcement": "{announce} смотрите в объявлении.",

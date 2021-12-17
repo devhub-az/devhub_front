@@ -33,8 +33,8 @@
         <!--                  data-icon="mdi-magnify" @click="searchUnit"></span>-->
         <!--        </div>-->
         <!--        <hubs-loading v-if="loading" :loading="loading"/>-->
-        <div v-for="hub in hubs"
-             class="flex justify-between border mb-2 p-2 bg-white dark:bg-dpaper dark:border-gray-700 xs:block xs:space-x-0 xs:space-y-2"
+        <div v-for="(hub,index) in hubs" :key="index"
+             class="flex justify-between border mb-2 p-2 bg-white dark:bg-dpaper dark:border-divider xs:block xs:space-x-0 xs:space-y-2"
              :id="hub.id + '_block'">
             <div class="flex space-x-3">
                 <img :id="hub.id" v-if="hub.attributes.logo" class="w-16 h-16 rounded p-1 dark:bg-dwall"
@@ -42,8 +42,8 @@
                      alt="Hub logo">
                 <a :href="'/hubs/' + hub.attributes.slug" class="w-10/12">
                     <div class="h-16 overflow-y-hidden mb-2">
-                        <div class="space-x-4 font-semibold dark:text-gray-300">
-                            <p>{{ hub.attributes.name }}</p>
+                        <div class="space-x-4 font-semibold dark:text-gray-300 text-sm">
+                            {{ hub.attributes.name }}
                         </div>
                         <p class="text-sm w-full font-light pb-2 dark:text-gray-300">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus beatae cumque dolorum
@@ -80,9 +80,9 @@
                     </div>
                 </a>
             </div>
-            <!--            <hub-follow-button :id="hub.id" :follower_check="hub.attributes.follower_check"-->
-            <!--                               @follow-status-updated="hub.attributes.follower_check = $event" :auth_check="auth_check"-->
-            <!--                               class="xs:w-full w-max my-auto px-6 text-center" :classes="'h-7 xs:h-auto xs:py-1'"/>-->
+            <hubs-follow-button :id="hub.id" :index="index" :follower_check="hub.attributes.follower_check"
+                                v-on:follow-status-updated="hub.attributes.follower_check = $event"
+                                class="xs:w-full w-max my-auto px-6 text-center" :classes="'h-7 xs:h-auto xs:py-1'"/>
         </div>
         <pagination
             v-if="pagination && pagination.last_page > 1"
