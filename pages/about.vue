@@ -8,5 +8,6 @@
 
 <script>
 export default {
+    middleware: 'auth_main'
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <main :class="{'dark': isDark}">
-        <div class="flex bg-wall font-sans flex-col min-h-screen overflow-x-hidden dark:bg-dwall">
+        <div class="flex bg-wall font-sans flex-col min-h-screen overflow-x-hidden dark:bg-primary">
             <Header/>
             <Nuxt/>
             <Footer/>

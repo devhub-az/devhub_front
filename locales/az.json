@@ -46,7 +46,8 @@
         "write": "Yazmaq",
         "back_to_home": "Ana səhifəyə qayıt",
         "back": "Geriyə",
-        "land_and_theme": "Dil & Rejim"
+        "land_and_theme": "Dil & Rejim",
+        "github": "Github ilə davam et"
     },
     "error": {
         "server_error": "Sistem çöküb",

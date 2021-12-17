@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="space-y-3" v-if="articles.length > 0">
-            <div class="w-full rounded border bg-white dark:bg-dpaper dark:border-gray-700"
+            <div class="w-full rounded border bg-white dark:bg-transparent dark:border-gray-700"
                  v-for="article in articles">
                 <div class="px-3.5">
                     <div class="flex items-center align-middle pt-3">
@@ -87,7 +87,7 @@
                 style="border-right: 2px solid; padding: 0 15px 0 15px;">500</span> Server error</h1>
         </div>
         <div v-else-if="articles.length === 0"
-             class="bg-white dark:bg-[#1f1f1f] dark:border-gray-800 rounded border py-10">
+             class="bg-white dark:bg-dpaper rounded border dark:border-divider py-10">
             <div class="w-2/3 mx-auto space-y-4 xs:w-full xs:px-4">
                 <div class="font-bold space-x-1 flex justify-center items-center text-center text-2xl pb-2">
                     <span class="iconify dark:text-gray-300" data-icon="tabler:square-x"
@@ -98,7 +98,7 @@
                     {{ $t('devhub.articles404Text') }}
                 </p>
                 <a href="/article/create"
-                   class="btn h-7 flex w-max mx-auto xs:hidden">
+                   class="btn text-white h-7 flex w-max mx-auto xs:hidden">
                     {{ $t('devhub.write') }}
                 </a>
             </div>
@@ -108,7 +108,7 @@
 
 <script>
 import pagination from "../plugins/pagination";
-import {mapState, mapActions, mapGetters} from "vuex";
+import {mapGetters} from "vuex";
 // const edjsHTML = require('editorjs-html');
 // const edjsParser = edjsHTML({code: codeParser, image: imageParser, embed: emdebParser});
 //

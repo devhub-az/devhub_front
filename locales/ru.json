@@ -72,7 +72,8 @@
         "write": "Написать",
         "back": "Назад",
         "back_to_home": "На главную",
-        "land_and_theme": "Язык & Тема"
+        "land_and_theme": "Язык & Тема",
+        "github": "Продолжить с Github"
     },
     "error": {
         "server_error": "Ошибка сервера",

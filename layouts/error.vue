@@ -1,17 +1,16 @@
 <template>
-    <div class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
-        <div class="bg-white dark:bg-dpaper dark:border-gray-700 rounded border py-10">
-            <div class="w-full mx-auto space-y-4 xs:w-full xs:px-4">
-                <div class="font-medium text-center text-2xl">
-                    <h1 v-if="error.statusCode === 404">404</h1>
-                    <h1 v-else>{{ $t('error.dev_will_solve') }}</h1>
-                </div>
-                <nuxt-link class="btn h-7 flex w-max mx-auto xs:hidden" :to="localePath('/')">
-                    {{ $t('devhub.back_to_home') }}
-                </nuxt-link>
-            </div>
+    <main class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
+        <div class="text-center flex flex-col justify-center items-center space-y-2 m-auto h-96">
+            <h1 class="text-8xl font-medium dark:text-gray-300" v-if="error.statusCode === 404">404</h1>
+            <h1 class="text-8xl font-medium dark:text-gray-300" v-else>500</h1>
+            <h2 class="text-2xl font-medium dark:text-gray-300">Страница не найдена</h2>
+            <p v-if="error.statusCode === 404" class="font-light dark:text-gray-400 w-2/3">Страница устарела, была удалена или не существовала вовсе</p>
+            <p v-else class="font-light dark:text-gray-400 w-2/3">{{ $t('error.dev_will_solve') }}</p>
+            <nuxt-link class="btn h-7 flex w-max mx-auto xs:hidden" :to="localePath('/')">-->
+                {{ $t('devhub.back_to_home') }}
+            </nuxt-link>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
