@@ -15,8 +15,8 @@
 <script>
 export default {
     async fetch({store}) {
-        await store.dispatch('hubs/getHubs')
         await store.dispatch('hubs/getTopHubs')
+        await store.dispatch('hubs/getHubs')
     }
 }
 </script>
