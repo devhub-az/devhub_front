@@ -2,7 +2,7 @@
     <div class="mt-1 relative">
         <button type="button" aria-haspopup="listbox" aria-expanded="true"
                 @click="show = !show"
-                class="relative w-full bg-white border dark:bg-dpaper dark:border-gray-700 border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-100 transition-colors pl-3 pr-7 h-7 text-left focus:outline-none focus:ring-0 dark:focus:border-gray-700 sm:text-sm">
+                class="relative w-full bg-white border dark:bg-input dark:border-gray-700 border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-100 transition-colors pl-3 pr-7 h-7 text-left focus:outline-none focus:ring-0 dark:focus:border-gray-700 sm:text-sm">
             <span class="flex items-center">
                 <span :class="selected.name === availableLocales[0].name ? '' : 'hidden'">
                     <span class="iconify transition-none dark:text-gray-300"
@@ -16,7 +16,7 @@
                     <span class="iconify transition-none dark:text-gray-300"
                           :data-icon="availableLocales[2].icon" data-inline="false"></span>
                 </span>
-                <span class="ml-2 block truncate text-black dark:text-gray-300">
+                <span class="ml-2 block truncate text-black dark:text-gray-300 text-sm">
                     {{ selected.name }}
                 </span>
             </span>
@@ -27,7 +27,7 @@
         </button>
         <transition name="fade">
             <div v-on-clickaway="hideDropdown" v-if="show" :class="side === 'bottom' ? 'bottom-8' : 'top-6'"
-                 class="absolute mt-2 min-w-min w-full right-0 rounded-md border bg-white dark:bg-dpaper dark:border-gray-700 border-gray-300 shadow-lg z-20">
+                 class="absolute mt-2 min-w-min w-full right-0 rounded-md border bg-white dark:bg-input dark:border-gray-700 border-gray-300 shadow-lg z-20">
                 <ul class="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                     <li id="listbox-item-0" role="option"
                         class="text-gray-900 cursor-default select-none relative">
@@ -38,7 +38,7 @@
                                 <span class="iconify transition-none"
                                       :class="locale.icon === 'bx:bxs-hot' ? 'text-cerulean-400' : 'dark:group-hover:text-black dark:text-gray-300'"
                                       :data-icon="locale.icon" data-inline="false"></span>
-                                <span class="ml-1 block truncate dark:text-gray-300 dark:group-hover:text-black">
+                                <span class="ml-1 block truncate dark:text-gray-300 dark:group-hover:text-black text-sm">
                                     {{ locale.name }}
                                 </span>
                             </div>

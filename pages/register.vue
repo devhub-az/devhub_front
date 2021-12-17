@@ -1,61 +1,60 @@
 <template>
     <form autocomplete="off" @submit.prevent="register" enctype="multipart/form-data" method="post"
           class="xs:max-w-xs w-96 text-left">
-        <div class="pt-4 pb-2">
+        <div class="pb-2">
             <a href="/login/github"
-               class="btn-outline trans-none border-gray-300 dark:border-gray-300 w-full items-center dark:text-black">
-                <div class="mx-auto flex space-x-1">
-                    <span class="iconify text-base text-gray-700 dark:text-gray-300" data-icon="simple-icons:github"
+               class="group btn-outline trans-none border-0 w-full pl-4 dark:text-black dark:hover:bg-zinc-700 hover:bg-zinc-300">
+                <div class="flex mx-auto items-center space-x-2">
+                    <span class="iconify text-base text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-100" data-icon="simple-icons:github"
                           data-inline="true"></span>
+                    <span class="dark:text-gray-300 trans-none font-semibold dark:group-hover:text-gray-100">
+                    {{ $t("devhub.github") }}
+                </span>
                 </div>
             </a>
             <div class="my-4 items-center flex">
-                <div class="mr-3 flex-grow border-t border-gray-300" aria-hidden="true"></div>
+                <div class="mr-3 flex-grow border-t border-dividerDark" aria-hidden="true"></div>
                 <div class="text-sm dark:text-gray-300">{{ $t('devhub.or') }}</div>
-                <div class="ml-3 flex-grow border-t border-gray-300" aria-hidden="true"></div>
+                <div class="ml-3 flex-grow border-t border-dividerDark" aria-hidden="true"></div>
+            </div>
+            <div class="dark:bg-red-700 text-center border dark:border-divider rounded mb-2 py-2 dark:text-gray-300" v-if="error">
+                {{ error_text }}
             </div>
             <div class="relative mb-2">
                 <input aria-invalid="true" autocomplete="off" id="username" name="username"
                        placeholder="richard" title="İstifadəçi adı"
                        type="text" inputmode="text"
                        class="input"
-                       :class="errors && errors.username ? 'border-red-500 focus:border-red-500' : 'hover:border-blue-light focus:border-blue-light'"
                        autocapitalize="none"
                        spellcheck="false"
-                       value="" v-model="username">
+                       v-model="username">
                 <span class="iconify absolute translate-y-1/2 text-gray-400 top-0 p-2 pr-4 cursor-pointer right-0"
                       data-icon="mdi:information-outline" data-inline="false"
                       title="İstifadəçi adı 3-15 simvoldan ibaret olmalidir"></span>
-
-                <p class="text-red-700 text-sm">{{ errors && errors.username ? errors.username[0] : null }}</p>
             </div>
             <div class="relative mb-2">
                 <input aria-invalid="true" autocomplete="off" id="email" name="email"
                        placeholder="richard.hendricks@piedpiper.com"
                        type="text" inputmode="text" title="Elektron poçt"
                        class="input"
-                       :class="error || (errors && errors.email) ? 'border-red-500 focus:border-red-500' : (success ? 'border-green-500 hover:border-green-500 focus:border-green-500' : 'hover:border-blue-light focus:border-blue-light')"
                        autocorrect="off" autocapitalize="none"
                        spellcheck="false"
-                       value="" v-model="email">
-                <p class="text-red-700 text-sm">{{ errors && errors.email ? errors.email[0] : null }}</p>
+                       v-model="email">
             </div>
             <div class="relative mb-2">
                 <input aria-invalid="true" autocomplete="current-password" id="password" name="password"
                        placeholder="••••••••"
                        :type="type" inputmode="text"
                        class="input"
-                       :class="errors && errors.password ? 'border-red-500 focus:border-red-500' : 'hover:border-blue-light focus:border-blue-light'"
                        autocapitalize="none"
                        spellcheck="false"
-                       value="" v-model="password">
-                <p class="text-red-700 text-sm">{{ errors && errors.password ? errors.password[0] : null }}</p>
-                <div v-if="type === 'password'" @click="typeChange()">
-                    <span class="iconify absolute translate-y-1/2 text-gray-400 top-0 my-3 mr-4 cursor-pointer right-0"
+                       v-model="password">
+                <div @click="typeChange()" :class="type === 'password' ? '' : 'hidden'">
+                    <span class="iconify absolute text-gray-400 top-2.5 right-4 cursor-pointer"
                           data-icon="mdi:eye-off"></span>
                 </div>
-                <div v-else-if="type !== 'password'" @click="typeChange()" class="z-50">
-                    <span class="iconify absolute translate-y-1/2 text-gray-400 top-0 my-3 mr-4 cursor-pointer right-0"
+                <div :class="type !== 'password' ? '' : 'hidden'" @click="typeChange()">
+                    <span class="iconify absolute text-gray-400 top-2.5 right-4 cursor-pointer"
                           data-icon="mdi:eye"></span>
                 </div>
             </div>
@@ -67,26 +66,26 @@
                        class="input"
                        aria-label="Şifrəni təsdiqlə" autocapitalize="none"
                        spellcheck="false"
-                       value="" v-model="password_confirmation">
-                <i class="mdi absolute translate-y-1/2 text-gray-400 top-0 p-2 pr-4 cursor-pointer right-0"
+                       v-model="password_confirmation">
+                <i class="mdi absolute text-gray-400 top-2.5 right-4 cursor-pointer"
                    :class="typeConfirm === 'password' ? 'mdi-eye-off' : 'mdi-eye'"
                    @click="typeConfirmChange()"></i>
             </div>
         </div>
         <div class="w-full">
-            <button v-if="loading"
-                    class="btn w-full">
-                <span class="animate-spin w-2 h-2 block mx-auto">
-                    <span class="iconify" data-icon="mdi-loading"></span>
-                </span>
-            </button>
-            <button v-else type="submit" class="btn w-full shadow-sm rounded-md text-center border-none">
-                <span class="block mx-auto">{{ $t('devhub.register') }}</span>
+            <div :class="!loading ? 'hidden' : ''"
+                 class="border-cerulean-600 flex items-center content-center text-white rounded bg-cerulean-600 hover:opacity-90 h-9">
+                <i class="iconify mx-auto block animate-spin" data-icon="tabler:refresh"/>
+            </div>
+            <button v-if="!loading" type="submit"
+                    class="btn text-white w-full mx-auto block">
+                {{ $t('devhub.register') }}
             </button>
         </div>
         <div
-            class="mt-4 bg-white text-center dark:bg-dpaper dark:text-gray-300 dark:border-gray-700 rounded py-4 text-sm border">
-            {{ $t('devhub.areRegistered') }} <a href="/login" class="text-cerulean-500">{{ $t('devhub.login') }}</a>
+            class="mt-4 bg-white border text-center dark:bg-transparent dark:text-gray-300 dark:border-dividerDark rounded py-4 text-sm">
+            {{ $t('devhub.areRegistered') }}
+            <nuxt-link :to="localePath('login')" class="text-cerulean-500 dark:font-semibold dark:text-cerulean-300 text-sm">{{ $t('devhub.login') }}</nuxt-link>
         </div>
     </form>
 </template>
@@ -115,7 +114,7 @@ export default {
             checking: false,
             loading: false,
             success: false,
-            errors: null
+            error_text: ''
         }
     },
     methods: {
@@ -157,22 +156,11 @@ export default {
                 })
 
                 await this.$router.push('/')
-            } catch (e) {
-                this.error = e.response.data.message
+            } catch (error) {
+                this.loading= false
+                this.error = true
+                this.error_text = error.response.data.message
             }
-
-            // this.$auth.loginWith('cookie', {
-            //     data: {
-            //         email: this.email,
-            //         password: this.password
-            //     },
-            // }).then(response => {
-            //     this.loading = false
-            //     window.location = '/';
-            // }).catch(error => {
-            //     this.loading = false
-            //     this.errors = error.response.data.errors
-            // })
         },
     }
 }

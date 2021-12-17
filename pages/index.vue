@@ -1,11 +1,22 @@
-<template class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
-    <div class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4" id="app">
+<template>
+    <div class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
         <div class="flex space-x-3 xs:space-x-0 xs:block">
-            3333
+            <div class="w-left xs:w-full">
+                <articles-all></articles-all>
+            </div>
+
+            <div class="w-right xs:w-full">
+                <hubs-top-rated></hubs-top-rated>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+    async fetch({store}) {
+        await store.dispatch('articles/getArticles')
+        await store.dispatch('hubs/topRated')
+    }
+}
 </script>
