@@ -59,8 +59,8 @@
                            minlength="3" :class="{hide: 'flex'}" :placeholder="$t('devhub.searchAll')"
                            required="required" v-if="hide" autofocus @keydown.esc="hide = false">
                     <span @click="search" :class="!hide ? 'hidden' : ''"
-                          class="text-gray-600 cursor-pointer text-sm absolute right-0 top-2 dark:text-gray-300">
-                        <i class="iconify" data-icon="tabler:x"></i>
+                          class="text-gray-100 cursor-pointer px-2 py-0.5 text-xs absolute right-0 top-1 rounded bg-gray-400 dark:text-gray-300 dark:bg-gray-600">
+                        ESC
                     </span>
                 </div>
             </div>
@@ -76,10 +76,8 @@
                         </span>
                     </NuxtLink>
                     <NuxtLink exact no-prefetch :to="localePath('/register')"
-                              class="btn text-white trans-none w-full mx-auto justify-center text-xs px-4 h-7">
-                        <span>
+                              class="btn text-white trans-none w-full mx-auto justify-center text-xs px-4 h-7 ">
                             {{ $t('devhub.register') }}
-                        </span>
                     </NuxtLink>
                 </div>
             </template>
@@ -112,6 +110,5 @@ export default {
             this.$auth.logout();
         }
     },
-    computed: {},
 }
 </script>

@@ -40,7 +40,11 @@ export default {
         '@/assets/css/tailwind.css',
     ],
 
-    plugins: ['~/plugins/axios'],
+    plugins: [
+        '~/plugins/axios',
+        '~/plugins/tooltip',
+        '~/plugins/functions',
+    ],
 
     components: true,
 
@@ -64,9 +68,9 @@ export default {
         localStorage: false,
         strategies: {
             local: {
-                url:'/',
+                url: '/',
                 endpoints: {
-                    csrf:{
+                    csrf: {
                         url: 'http://127.0.0.1:8090/sanctum/csrf-cookie'
                     },
                     login: {

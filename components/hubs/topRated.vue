@@ -7,16 +7,16 @@
             <div class="flex flex-col rounded bg-white dark:bg-transparent text-black p-5 space-y-2">
                 <nuxt-link :to="'#'" v-for="(hub,index) in top_rated" :key="index">
                     <div class="flex items-center space-x-2">
-                        <img :src="'/images/hubs/' + hub.attributes.logo + '.png'" alt="Hub logo" width="48"
+                        <img :src="'/images/hubs/' + hub.logo + '.png'" alt="Hub logo" width="48"
                              class="w-12 h-12 rounded">
                         <span class="inline-block font-semibold dark:text-gray-300 leading-5">
-                            {{ hub.attributes.name }}
+                            {{ hub.name }}
                         </span>
                     </div>
                     <div
                         class="flex ml-14 space-x-1 items-center text-xs dark:text-gray-300">
                         <span class="iconify" data-icon="tabler:users" data-inline="false"></span>
-                        <p>{{ $t('devhub.rating') }}: {{ hub.attributes.rating }}</p>
+                        <p>{{ $t('devhub.rating') }}: {{ hub.rating }}</p>
                     </div>
                 </nuxt-link>
             </div>

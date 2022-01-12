@@ -6,7 +6,7 @@
             <h2 class="text-2xl font-medium dark:text-gray-300">Страница не найдена</h2>
             <p v-if="error.statusCode === 404" class="font-light dark:text-gray-400 w-2/3">Страница устарела, была удалена или не существовала вовсе</p>
             <p v-else class="font-light dark:text-gray-400 w-2/3">{{ $t('error.dev_will_solve') }}</p>
-            <nuxt-link class="btn h-7 flex w-max mx-auto xs:hidden" :to="localePath('/')">-->
+            <nuxt-link class="btn flex w-max mx-auto" :to="localePath('/')">-->
                 {{ $t('devhub.back_to_home') }}
             </nuxt-link>
         </div>
