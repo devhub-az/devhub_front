@@ -11,7 +11,7 @@
         "lint": "yarn lint:js"
     },
     "dependencies": {
-        "@iconify/vue2": "^1.1.1",
+        "@iconify/vue2": "^1.1.2",
         "@nuxtjs/auth-next": "^5.0.0-1637745161.ea53f98",
         "@nuxtjs/axios": "^5.13.6",
         "@nuxtjs/i18n": "^7.2.0",
