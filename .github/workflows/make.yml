@@ -29,5 +29,5 @@ jobs:
             -   name: Docker up
                 run: make docker-up
 
-            -   name: Yarn start
-                run: make yarn-start
+            -   name: Yarn build
+                run: make yarn-build
