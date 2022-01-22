@@ -32,6 +32,9 @@ yarn-install:
 yarn-upgrade:
 	docker-compose run --rm node yarn upgrade
 
+yarn-start:
+	docker-compose run --rm node yarn dev
+
 docker-down-clear:
  	COMPOSE_PROJECT_NAME=devhub docker-compose -f docker-compose.yml down -v --remove-orphans
 

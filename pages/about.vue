@@ -1,7 +1,7 @@
 <template class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto xs:px-4">
     <div class="bg-radial-green bg-no-repeat bg-contain bg-opacity-60 relative" data-aos-easing="ease-out-quart"
          data-aos-duration="750" data-aos-delay="0">
-        <div class="xl:container py-20 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto overflow-hidden xs:px-4 space-y-56">
+        <div class="xl:container py-20 sm:mx-0 xs:mx-0 lg:mx-auto overflow-hidden xs:px-4 space-y-56">
             <div class="space-y-5">
                 <h1 class="text-7xl dark:text-gray-300 px-4 sm:text-5xl w-auto font-bold text-center mx-auto max-w-5xl leading-tight sm:px-0">
                     {{ $t('devhub.about_title') }}
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <section class="xl:container my-20 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto overflow-hidden xs:px-4">
+        <section class="xl:container my-20 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto overflow-hidden xs:px-4">
             <div class="flex space-x-10 rounded-xl w-full px-12 py-12 xs:block"
                  style="background: linear-gradient(161deg, rgba(64, 229, 255, 0.5), rgba(20, 91, 252, 0.5)) rgb(107 107 107)">
                 <div class="w-4/6 xs:w-full">
@@ -72,7 +72,7 @@
             </div>
         </section>
         <section
-            class="flex space-x-5 xl:container my-20 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto overflow-hidden xs:block xs:space-y-4 xs:space-x-0 px-4">
+            class="flex space-x-5 xl:container my-20 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto overflow-hidden xs:block xs:space-y-4 xs:space-x-0 px-4">
             <div class="rounded-xl w-full px-12 pt-12" data-aos="fade-up"
                  style="background: linear-gradient(rgba(241, 235, 235, 0.95), rgba(240, 240, 240, 0.9)) rgb(90 130 242)">
                 <span class="iconify text-5xl text-cerulean-100" data-icon="gg:feed" data-inline="false"></span>
@@ -114,9 +114,9 @@
                 </div>
             </div>
         </section>
-        <section class="lg:container xl:container my-20 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto"
+        <section class="lg:container xl:container my-20 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto"
                  data-aos="fade-up">
-            <h2 class="mb-6 font-sans text-center text-3xl mb-4 font-medium leading-none tracking-tight dark:text-gray-300 sm:text-4xl mx-auto">
+            <h2 class="font-sans text-center text-3xl mb-4 font-medium leading-none tracking-tight dark:text-gray-300 sm:text-4xl mx-auto">
                 Hansı formatı seçim?
             </h2>
             <about-slider></about-slider>
@@ -195,7 +195,7 @@
                 </div>
             </div>
         </section>
-        <section class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto">
+        <section class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto">
             <div class="pb-5 pt-4">
                 <div class="grid xs:block sm:block grid-cols-2 relative overflow-hidden">
                     <div class="m-auto w-2/3 dark:text-gray-300">
@@ -309,7 +309,7 @@
                 </div>
             </div>
         </section>
-        <section class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto">
+        <section class="lg:container xl:container my-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto">
             <div class="py-10">
                 <div class="grid relative xs:block sm:block grid-cols-2 overflow-hidden">
                     <div
@@ -424,7 +424,7 @@
                 </div>
             </div>
         </section>
-        <section class="lg:container xl:container mt-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto py-12 relative">
+        <section class="lg:container xl:container mt-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto py-12 relative">
             <div class="px-32 mb-12">
                 <h1 class="text-4xl py-4 font-semibold text-black text-center dark:text-gray-300">
                     Access even outside of the browser
@@ -436,7 +436,7 @@
             </div>
             <img src="/images/about/devices.png" alt="">
         </section>
-        <section class="lg:container xl:container mt-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto xl:mx-auto py-12 relative">
+        <section class="lg:container xl:container mt-4 mx-4 sm:mx-0 xs:mx-0 lg:mx-auto py-12 relative">
             <div class="px-32">
                 <h1 class="text-4xl py-4 font-semibold text-black text-center dark:text-gray-300">
                     Но подождите, это еще не все

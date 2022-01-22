@@ -1,0 +1,34 @@
+name: Develop docker test
+on: [ push, pull_request ]
+
+env:
+    REGISTRY: docker.pkg.github.com/hose1021/devhub_front
+    REGISTRY_HOST: docker.pkg.github.com
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: symfonycorp/security-checker-action@v2
+
+            -   name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: node_modules
+                    key: yarn-${{ hashFiles('yarn.lock') }}
+
+            -   name: Docker pull
+                run: make docker-pull
+
+            -   name: Docker build
+                run: make docker-build
+
+            -   name: Yarn install
+                run: make yarn-install
+
+            -   name: Docker up
+                run: make docker-up
+
+            -   name: Yarn start
+                run: make yarn-start
