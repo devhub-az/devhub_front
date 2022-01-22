@@ -56,16 +56,17 @@
 
     .btn {
         @apply cursor-pointer
+        relative
         whitespace-nowrap
         border
         xs:w-full
         text-sm
-        text-sm
         rounded
-        h-9
-        items-center
-        inline-flex
-        px-3
+        py-[5px]
+        font-medium
+        align-middle
+        inline-block
+        px-4
         bg-sky-600
         border-sky-600
         hover:bg-sky-700
@@ -79,15 +80,17 @@
 
     .btn-outline {
         @apply cursor-pointer
+        relative
         whitespace-nowrap
         border
         xs:w-full
         text-sm
         rounded
-        h-9
-        items-center
-        inline-flex
-        px-3
+        py-[5px]
+        font-medium
+        align-middle
+        inline-block
+        px-4
         border-gray-300
         hover:border-sky-500
         dark:border-gray-600
@@ -106,6 +109,10 @@
 
     .button {
         @apply border border-sky-700 font-normal uppercase text-sm rounded px-3 py-2 text-white bg-sky-700 hover:bg-sky-800 hover:border-sky-800
+    }
+
+    .iconify{
+        @apply inline-block
     }
 
     .py-05 {
@@ -148,7 +155,7 @@
         border-color: #e9e9e9;
     }
 
-    input, select, textarea, button, a{
+    input, select, textarea {
         @apply text-xs leading-4
     }
 }

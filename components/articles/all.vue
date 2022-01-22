@@ -5,35 +5,30 @@
                  v-for="article in articles">
                 <div class="px-3.5">
                     <div class="flex items-center align-middle pt-3">
-                        <a v-bind:href="'/@' + article.relationships.author.data.attributes.username"
+                        <a v-bind:href="'/@' + article.relationships.author.data.username"
                            class="inline-flex no-underline author-popover"
                            :data-id="article.relationships.author.data.id"
                            title="Paylaşmanın müəllifi">
-                            <img height="32" width="32"
-                                 alt="user avatar" class="w-6 h-6 flex-none image-fit rounded lazyload"
-                                 :src="article.relationships.author.data.attributes.avatar">
+                            <img
+                                :src="article.relationships.author.data.avatar || '/images/avatars/default.png'"
+                                height="32" width="32"
+                                class="w-7 h-7 flex-none image-fit rounded object-cover"
+                                alt="Profile image">
                             <p class="text-sm pl-2 m-auto dark:text-gray-300">
-                                {{ '@' + article.relationships.author.data.attributes.username }}</p>
+                                {{ '@' + article.relationships.author.data.username }}</p>
                         </a>
-                        <p class="text-xs my-auto mr-auto pl-2 dark:text-gray-300">
-                            {{ article.attributes.created_at | moment('DD MMMM, H:mm') }}
+                        <p class="text-xs my-auto mr-auto pl-2 dark:text-gray-300" v-tooltip="'Oxumaq vaxtı'">
+                            {{ article.attributes.created_at }}
                         </p>
-                        <!--                        <div class="flex items-center text-sm my-auto xs:hidden md:hidden sm:hidden read-time"-->
-                        <!--                             aria-label="Oxumaq vaxtı" data-balloon-pos="left">-->
-                        <!--                            <span class="iconify dark:text-gray-300" data-icon="tabler:clock"></span>-->
-                        <!--                            <p class="ml-1 dark:text-gray-300">{{ article.attributes.read_time }}</p>-->
-                        <!--                        </div>-->
-                        <vote :item="article" class="vote" aria-label="Oxumaq vaxtı" data-balloon-pos="left"/>
+                        <vote :item="article" class="vote"/>
                     </div>
-                    <div class="grid grid-flow-col py-2">
-                        <a :href="'/article/' + article.attributes.slug"
-                           class="my-auto text-2xl xs:text-xl dark:text-gray-300">
-                            {{ article.attributes.title }}
-                        </a>
-                    </div>
-                    <hubs-tags v-if="article.relationships.hubs.data.length" :data="article.relationships.hubs.data"
-                               :auth_check="auth_check"/>
-                    <div class="prose my-2 xs:hidden md:hidden sm:hidden">
+                    <a :href="'/article/' + article.attributes.slug"
+                       class="my-auto text-2xl xs:text-xl dark:text-gray-300">
+                        {{ article.attributes.title }}
+                    </a>
+                    <!--                    <hubs-tags v-if="article.relationships.hubs.data.length" :data="article.relationships.hubs.data"-->
+                    <!--                               :auth_check="auth_check"/>-->
+                    <div class="prose prose-headings:dark:text-gray-300 my-2 xs:hidden md:hidden sm:hidden">
                         <div
                             v-for="block in edjsParser.parse(JSON.parse(article.attributes.body)).slice(0,2)"
                             v-html="block.length > 700 ? block.slice(0,600) + '...' : block" class="break-words"></div>
@@ -43,17 +38,15 @@
                     class="grid lg:grid-cols-main rounded-b border-t dark:border-gray-700 py-3 px-3.5 mt-2">
                     <div class="flex xs:justify-between items-center md:justify-between sm:justify-between space-x-10">
                         <div class="flex items-center">
-                            <i class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:eye"/>
-                            <p class="ml-1 text-gray-500 dark:text-gray-300">{{ article.attributes.views }}</p>
+                            <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:eye"/>
+                            <p class="ml-1 text-gray-500 dark:text-gray-300 text-sm">{{ article.attributes.views }}</p>
                         </div>
-                        <div>
-                            <a :href="'/article/' + article.attributes.slug + '#comments'" class="flex items-center">
-                                <i class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:message"/>
-                                <p class="ml-1 text-gray-500 dark:text-gray-300">
-                                    {{ article.relationships.comments.data.length }}
-                                </p>
-                            </a>
-                        </div>
+                        <a :href="'/article/' + article.attributes.slug + '#comments'" class="flex items-center">
+                            <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:message"/>
+                            <p class="ml-1 text-gray-500 dark:text-gray-300 text-sm">
+                                {{ article.relationships.comments.data.length }}
+                            </p>
+                        </a>
                         <span class="iconify text-gray-500 dark:text-gray-300" data-icon="tabler:device-floppy"
                               data-inline="false"></span>
                         <!--                        <favorite :article="article" :auth_check="auth_check"/>-->
@@ -80,12 +73,6 @@
             <pagination v-if="pagination.last_page > 1" :pagination="pagination" :offset="5"
                         @paginate="getPosts()"/>
         </div>
-        <div v-else-if="error" class="article-content__item"
-             style="text-align: center; display: grid; grid-gap: 12px;">
-            <span style="font-size: 5rem; opacity: .7;">¯\_(ツ)_/¯</span>
-            <h1 style="font-family: 'Nunito', sans-serif;"><span
-                style="border-right: 2px solid; padding: 0 15px 0 15px;">500</span> Server error</h1>
-        </div>
         <div v-else-if="articles.length === 0"
              class="bg-white dark:bg-dpaper rounded border dark:border-divider py-10">
             <div class="w-2/3 mx-auto space-y-4 xs:w-full xs:px-4">
@@ -97,8 +84,7 @@
                 <p class="font-light text-center dark:text-gray-400">
                     {{ $t('devhub.articles404Text') }}
                 </p>
-                <a href="/article/create"
-                   class="btn text-white h-7 flex w-max mx-auto xs:hidden">
+                <a href="/article/create" class="btn text-white block w-max mx-auto xs:hidden">
                     {{ $t('devhub.write') }}
                 </a>
             </div>
@@ -109,38 +95,31 @@
 <script>
 import pagination from "../plugins/pagination";
 import {mapGetters} from "vuex";
-// const edjsHTML = require('editorjs-html');
-// const edjsParser = edjsHTML({code: codeParser, image: imageParser, embed: emdebParser});
-//
-// function codeParser(block) {
-//     return `<code>` + block.data.code + `</code>`
-// }
-//
-// function imageParser(block) {
-//     return `<img src="` + block.data.url + `" alt="` + block.data.caption + `">`
-// }
-//
-// function emdebParser(block) {
-//     return '<iframe class="w-full h-80" src="' + block.data.embed + '"></iframe>';
-// }
+import Vote from "components/plugins/vote";
+
+const edjsHTML = require('editorjs-html');
+const edjsParser = edjsHTML({code: codeParser, image: imageParser, embed: emdebParser});
+
+function codeParser(block) {
+    return `<code>` + block.data.code + `</code>`
+}
+
+function imageParser(block) {
+    return `<img src="` + block.data.url + `" alt="` + block.data.caption + `">`
+}
+
+function emdebParser(block) {
+    return '<iframe class="w-full h-80" src="' + block.data.embed + '"></iframe>';
+}
 
 export default {
     components: {
+        Vote,
         pagination,
     },
     data() {
         return {
-            notification: {
-                message: '',
-                type: '',
-            },
-            id: [],
-            // edjsParser: edjsHTML(),
-            content: '',
-            error: false,
-            loading: false,
-            hovered: false,
-            articlesEmpty: false,
+            edjsParser: edjsHTML(),
         }
     },
     computed: {

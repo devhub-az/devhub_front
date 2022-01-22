@@ -3,21 +3,21 @@
           class="xs:max-w-xs w-96 text-left">
         <div class="pb-2">
             <a href="/login/github"
-               class="group btn-outline trans-none border-0 w-full pl-4 dark:text-black dark:hover:bg-zinc-700 hover:bg-zinc-300">
-                <div class="flex mx-auto items-center space-x-2">
-                    <span class="iconify text-base text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-100" data-icon="simple-icons:github"
-                          data-inline="true"></span>
-                    <span class="dark:text-gray-300 trans-none font-semibold dark:group-hover:text-gray-100">
+               class="group btn-outline text-center border-0 w-full pl-4 dark:text-black dark:hover:bg-zinc-700 hover:bg-zinc-300">
+                <span class="iconify text-base text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-100"
+                      data-icon="simple-icons:github"
+                      data-inline="true"></span>
+                <span class="dark:text-gray-300 trans-none font-semibold dark:group-hover:text-gray-100">
                     {{ $t("devhub.github") }}
                 </span>
-                </div>
             </a>
             <div class="my-4 items-center flex">
                 <div class="mr-3 flex-grow border-t border-dividerDark" aria-hidden="true"></div>
                 <div class="text-sm dark:text-gray-300">{{ $t('devhub.or') }}</div>
                 <div class="ml-3 flex-grow border-t border-dividerDark" aria-hidden="true"></div>
             </div>
-            <div class="dark:bg-red-700 text-center border dark:border-divider rounded mb-2 py-2 dark:text-gray-300" v-if="error">
+            <div class="dark:bg-red-700 text-center border dark:border-divider rounded mb-2 py-2 dark:text-gray-300"
+                 v-if="error">
                 {{ error_text }}
             </div>
             <div class="relative mb-2">
@@ -85,7 +85,11 @@
         <div
             class="mt-4 bg-white border text-center dark:bg-transparent dark:text-gray-300 dark:border-dividerDark rounded py-4 text-sm">
             {{ $t('devhub.areRegistered') }}
-            <nuxt-link :to="localePath('login')" class="text-cerulean-500 dark:font-semibold dark:text-cerulean-300 text-sm">{{ $t('devhub.login') }}</nuxt-link>
+            <nuxt-link :to="localePath('login')"
+                       class="text-cerulean-500 dark:font-semibold dark:text-cerulean-300 text-sm">{{
+                    $t('devhub.login')
+                }}
+            </nuxt-link>
         </div>
     </form>
 </template>
@@ -157,7 +161,7 @@ export default {
 
                 await this.$router.push('/')
             } catch (error) {
-                this.loading= false
+                this.loading = false
                 this.error = true
                 this.error_text = error.response.data.message
             }

@@ -2,7 +2,7 @@
     <div class="relative ml-2">
         <button @click="show = !show" type="button" aria-haspopup="listbox" aria-expanded="true"
                 class="flex items-center focus:outline-none p-0 bg-none">
-            <img :src="user.attributes.avatar || '/images/avatars/default.png'"
+            <img :src="user.avatar || '/images/avatars/default.png'"
                  class="w-7 h-7 flex-none image-fit rounded object-cover"
                  alt="Profile image">
         </button>
@@ -11,16 +11,13 @@
                 <div
                     class="w-52 text-sm text-left border border-gray-300 bg-white dark:bg-dpaper dark:border-zinc-800 rounded shadow-lg">
                     <div class="flex items-center p-3">
-                        <!--                        <img v-if="user.avatar !== 'default'" :src="avatar_url"-->
-                        <!--                             class="h-10 w-10 rounded object-cover flex-no-shrink"-->
-                        <!--                             alt="Profile image">-->
-                        <img src="/images/avatars/default.png"
-                             class="h-7 w-7 rounded object-cover flex-no-shrink"
+                        <img :src="user.avatar || '/images/avatars/default.png'"
+                             class="w-7 h-7 flex-none image-fit rounded object-cover"
                              alt="Profile image">
                         <div class="ml-2">
-                            <a :href="'/@' + user.attributes.username"
+                            <nuxt-link :to="'/authors/' + user.username"
                                class="font-semibold text-gray-900 dark:text-gray-300 leading-none">
-                                {{ user.attributes.name ? user.attributes.name : '@' + user.attributes.username }}</a>
+                                {{ user.name ? user.name : '@' + user.username }}</nuxt-link>
                         </div>
                     </div>
                     <div class="bg-gray-300 dark:bg-zinc-800 h-[1px]"></div>

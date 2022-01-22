@@ -1,14 +1,13 @@
 <template>
     <form autocomplete="off" @submit.prevent="login" method="post" class="xs:max-w-xs w-96">
         <a href="/login/github"
-           class="group btn-outline trans-none border-0 w-full pl-4 dark:text-black dark:hover:bg-zinc-700 hover:bg-zinc-300">
-            <div class="flex mx-auto items-center space-x-2">
-                    <span class="iconify text-base text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-100" data-icon="simple-icons:github"
-                          data-inline="true"></span>
-                <span class="dark:text-gray-300 trans-none font-semibold dark:group-hover:text-gray-100">
-                    {{ $t("devhub.github") }}
-                </span>
-            </div>
+           class="group btn-outline text-center border-0 w-full pl-4 dark:text-black dark:hover:bg-zinc-700 hover:bg-zinc-300">
+            <span class="iconify text-base text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-100"
+                  data-icon="simple-icons:github"
+                  data-inline="true"></span>
+            <span class="dark:text-gray-300 trans-none font-semibold dark:group-hover:text-gray-100">
+                {{ $t("devhub.github") }}
+            </span>
         </a>
         <div class="my-4 items-center flex">
             <div class="mr-3 flex-grow border-t border-dividerDark" aria-hidden="true"></div>

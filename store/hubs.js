@@ -51,9 +51,14 @@ export const actions = {
                     console.log(error);
                 });
         } else {
-            this.$toast.error(this.$t('error.not_registered'))
+            this.$toast.error(this.app.i18n.t('error.not_registered'))
         }
-    }
+    },
+    async searchHub({state, commit}, search) {
+        const {data} = await this.$axios.get('/search_hub?q=' + search);
+        commit('ADD_HUBS', data.data)
+        commit('ADD_PAGINATION', data.meta)
+    },
 }
 
 export const mutations = {
