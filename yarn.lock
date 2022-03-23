@@ -932,10 +932,10 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
-"@iconify/vue2@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@iconify/vue2/-/vue2-1.1.4.tgz#6cf3afa4660c5b20418591b3647457a1e3cd426e"
-  integrity sha512-U9gqcj4hD/odF0QxSxwpGXEj/QSE9pY/4gAd8JF4ZidEFvZDHRrChLyBqBBid5O8hS8eejXlJEJBfpVxKq8bVg==
+"@iconify/vue2@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@iconify/vue2/-/vue2-1.2.0.tgz#8e1213a1274453208e0ea496d5882d3a7167691f"
+  integrity sha512-IDAFNbHKzuTdYmUmlSuOktAHJ9t1DiDGv83r7ie1dM+SQKJ0XGg4oHC0YIAnsBJPiOzNSXQuNcj5fHP7Q18/jA==
 
 "@iconify/vue@^3.2.0":
   version "3.2.0"
