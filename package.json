@@ -21,7 +21,7 @@
         "@nuxtjs/toast": "^3.3.1",
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.2",
-        "cookie-universal-nuxt": "^2.1.5",
+        "cookie-universal-nuxt": "^2.2.1",
         "core-js": "^3.22.7",
         "editorjs-html": "^3.4.2",
         "nuxt": "^2.15.8",
