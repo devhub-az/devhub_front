@@ -22,7 +22,7 @@
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.3",
         "cookie-universal-nuxt": "^2.2.1",
-        "core-js": "^3.23.3",
+        "core-js": "^3.27.2",
         "editorjs-html": "^3.4.2",
         "nuxt": "^2.15.8",
         "v-tooltip": "^2.1.3",
